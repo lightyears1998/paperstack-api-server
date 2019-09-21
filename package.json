@@ -7,10 +7,11 @@
   "author": "github.com/super-dash",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint src --ext .ts --fix",
-    "build": "babel src --extensions .ts --out-dir dist",
-    "prestart": "npm run-script build",
-    "start": "node dist/app.js"
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "npm run-script lint -- --fix",
+    "build": "babel src --extensions .ts --out-dir bin",
+    "prestart:dev": "npm run-script build",
+    "start:dev": "node bin/app.js"
   },
   "devDependencies": {
     "@types/node": "^12.7.5",

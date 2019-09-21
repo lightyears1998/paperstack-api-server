@@ -11,7 +11,8 @@
     "lint:fix": "npm run-script lint -- --fix",
     "build": "babel src --extensions .ts --out-dir bin",
     "prestart:dev": "npm run-script build",
-    "start:dev": "node bin/app.js"
+    "start:dev": "node bin/app.js",
+    "test": "echo No test sepcified."
   },
   "devDependencies": {
     "@types/node": "^12.7.5",

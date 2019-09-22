@@ -1,6 +1,6 @@
 {
   "name": "paperstack-api-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "作业收集平台PaperStack的API服务器",
   "main": "src/app.ts",
   "repository": "https://github.com/super-dash/paperstack-api-server.git",

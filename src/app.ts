@@ -10,7 +10,7 @@ const app = express();
 
 app.all('/', (req, res) => {
   res.json({
-    "msg": "欢迎使用PaperStack API Server。",
+    "message": "欢迎使用PaperStack API Server。",
     "version": version
   })
 })

@@ -8,23 +8,37 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src --ext .ts",
-    "lint:fix": "npm run-script lint -- --fix",
+    "lint:fix": "yarn run lint --fix",
     "build": "babel src --extensions .ts --out-dir bin",
-    "prestart:dev": "npm run-script build",
-    "start:dev": "node bin/app.js",
+    "watch": "yarn run build --watch",
+    "start": "node bin/app.js",
+    "start:nodemon": "nodemon bin/app.js",
+    "start:dev": "npm-run-all --parallel watch start:nodemon",
     "test": "echo No test sepcified."
   },
   "devDependencies": {
-    "@types/node": "^12.7.5",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.4.0"
+    "eslint": "^6.4.0",
+    "nodemon": "^1.19.2",
+    "npm-run-all": "^4.1.5"
   },
-  "dependencies": {    
+  "dependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-typescript": "^7.6.0",
     "@babel/register": "^7.6.0",
+    "@types/bluebird": "^3.5.27",
+    "@types/express": "^4.17.1",
+    "@types/js-yaml": "^3.12.1",
+    "@types/node": "^12.7.5",
+    "@types/sequelize": "^4.28.4",
+    "@types/validator": "^10.11.3",
+    "express": "^4.17.1",
+    "js-yaml": "^3.13.1",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.19.0",
     "typescript": "^3.6.3"
   }
 }

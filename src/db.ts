@@ -1,9 +1,9 @@
 import config from "./config";
-import { Sequelize } from "sequelize";
+import Sequelize from "sequelize";
 
 const dbconfig = config.database;
 
-const sequelize = new Sequelize(dbconfig.db, dbconfig.user, dbconfig.pass, {
+const sequelize = new Sequelize.Sequelize(dbconfig.db, dbconfig.user, dbconfig.pass, {
   host:    dbconfig.host,
   dialect: "postgres"
 });

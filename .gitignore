@@ -1,6 +1,10 @@
 # Compiled file
 bin
 
+# Configuration
+conf/*.yml
+!conf/*.example.yml
+
 # Node.js
 node_modules
 yarn-error.log

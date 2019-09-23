@@ -9,7 +9,6 @@ interface Configuration {
   database: DatabaseConfiguration
 }
 
-
 interface DatabaseConfiguration {
   host: string,
   user: string,

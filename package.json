@@ -15,7 +15,7 @@
     "build:watch": "yarn run build --watch",
     "watch": "npm-run-all --parallel lint:watch build:watch",
     "start": "node bin/app.js",
-    "start:nodemon": "nodemon bin/app.js",
+    "start:nodemon": "nodemon bin/app.js --delay 3",
     "start:dev": "npm-run-all --parallel watch start:nodemon",
     "test": "echo No test sepcified."
   },

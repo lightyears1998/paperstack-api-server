@@ -1,13 +1,15 @@
 import config from "./config";
+import router from "./route";
 import fs from "fs";
 import path from "path";
 import express from "express";
+import bodyParser from "body-parser";
 
 const version = JSON.parse(fs.readFileSync(path.resolve(`${__dirname}/../package.json`), "utf8")).version;
 const serverConfig = config.server;
 
-
 const app = express();
+app.use(bodyParser.json());
 
 app.all("/", (req, res) => {
   res.json({
@@ -15,6 +17,8 @@ app.all("/", (req, res) => {
     "version": version
   });
 });
+
+app.use(router);
 
 app.listen(serverConfig.port, () => {
   console.log(`PaperStack API服务器 v${version}`);

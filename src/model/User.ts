@@ -1,4 +1,5 @@
 import sequelize from "./../db";
+
 import Sequelize, { Model } from "sequelize";
 
 class User extends Model {}

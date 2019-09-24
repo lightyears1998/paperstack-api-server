@@ -5,10 +5,12 @@ import fs from "fs";
 import path from "path";
 import express from "express";
 
+
 const version = JSON.parse(fs.readFileSync(path.resolve(`${__dirname}/../package.json`), "utf8")).version;
 const serverConfig = config.server;
 
 const app = express();
+
 app.use(express.json());
 
 app.all("/", (req, res) => {

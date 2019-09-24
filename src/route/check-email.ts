@@ -7,6 +7,11 @@ import { checkEmailAvailabilty } from "./../util";
 const checkEmail: RequestHandler = async function (req, res) {
   let email: string = typeof req.body.email === "string" ? req.body.email : "";
 
+  /*
+   * @TODO
+   * 验证邮箱地址格式（validator）
+   */
+
   res.json({
     available: await checkEmailAvailabilty(email)
   });

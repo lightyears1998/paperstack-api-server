@@ -1,5 +1,7 @@
-import { RequestHandler } from "express";
 import { checkEmailAvailabilty } from "./../util";
+
+import { RequestHandler } from "express";
+
 
 /**
  * 检查由`req.body.email`指定邮箱地址是否未被占用。

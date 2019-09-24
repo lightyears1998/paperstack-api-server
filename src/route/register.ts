@@ -17,7 +17,7 @@ const register: RequestHandler = async function (req, res) {
 
   if (email === "" || password === "") {
     res.json({
-      message: "邮箱或密码不能为空"
+      message: "注册失败"
     });
     return;
   }

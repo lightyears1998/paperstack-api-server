@@ -1,10 +1,61 @@
+import { User, Authkey } from "./../model";
+import { comparePassword, hashPassword } from "./../util";
+
 import { RequestHandler } from "express";
 
-/**
- * 检查由`req.body.email`指定邮箱地址是否未被占用。
- */
+
 const modifyPassword: RequestHandler = async function (req, res) {
-  let email: string = typeof req.body.email === "string" ? req.body.email : "";
+  let authkey: string = typeof req.body.authkey === "string" ? req.body.authkey : "";
+  let oldPassword: string = typeof req.body.oldPassword === "string" ? req.body.oldPassword : "";
+  let newPassword: string = typeof req.body.newPassword === "string" ? req.body.newPassword : "";
+
+  if (authkey === "" || oldPassword === "" || newPassword === "") {
+    res.json({
+      message: "修改失败"
+    });
+    return;
+  }
+
+  let key: Authkey = await Authkey.findOne({
+    where: {
+      value: authkey
+    }
+  });
+  if (key == null) {
+    res.json({
+      message: "修改失败"
+    });
+    return;
+  }
+
+  let user = await User.findOne({
+    where: {
+      id: key.userId
+    }
+  });
+  if (user == null) {
+    res.json({
+      message: "修改失败"
+    });
+    return;
+  }
+
+  let passwordMatch: boolean = await comparePassword(oldPassword, user.passwordHash);
+  if (!passwordMatch) {
+    res.json({
+      message: "修改失败"
+    });
+    return;
+  }
+
+  let newPasswordHash: string = await hashPassword(newPassword);
+
+  user.update({
+    passwordHash: newPasswordHash
+  });
+  res.json({
+    message: "修改成功"
+  });
 };
 
 export default modifyPassword;

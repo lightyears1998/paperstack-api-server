@@ -8,6 +8,8 @@ class Authkey extends Model {
   value: string;
   usedAt: Date;
 
+  userId: number;
+
   static generateNewKey(): string {
     return randomstring.generate(32);
   }
@@ -15,9 +17,10 @@ class Authkey extends Model {
 
 Authkey.init({
   value: {
-    type:      Sequelize.STRING,
-    allowNull: false,
-    comment:   "访问密钥值" },
+    type:       Sequelize.STRING,
+    primaryKey: true,
+    allowNull:  false,
+    comment:    "访问密钥值" },
   usedAt: {
     type:         "TIMESTAMP",
     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),

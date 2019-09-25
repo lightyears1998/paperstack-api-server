@@ -19,6 +19,7 @@
     "test": "echo No test sepcified."
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.4.0",
     "eslint-watch": "^6.0.0",
@@ -40,6 +41,7 @@
     "@types/sequelize": "^4.28.4",
     "@types/validator": "^10.11.3",
     "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "js-yaml": "^3.13.1",
     "pg": "^7.12.1",

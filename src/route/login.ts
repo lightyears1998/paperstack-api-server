@@ -8,16 +8,20 @@ const login: RequestHandler = async function (req, res) {
   let email: string = typeof req.body.email === "string" ? req.body.email : "";
   let password: string = typeof req.body.password === "string" ? req.body.password : "";
 
+  const codeSuccess = 1;
+  const codeEmailNotExist = 2;
+  const codeEmailPasswordMismatch = 3;
+
   if (email === "") {
     res.json({
-      message: "邮箱不存在"
+      result: codeEmailNotExist
     });
     return;
   }
 
   if (password === "") {
     res.json({
-      message: "邮箱或密码错误"
+      result: codeEmailPasswordMismatch
     });
     return;
   }
@@ -31,7 +35,7 @@ const login: RequestHandler = async function (req, res) {
 
   if (user == null) {
     res.json({
-      message: "邮箱或密码错误"
+      result: codeEmailNotExist
     });
     return;
   }
@@ -39,7 +43,7 @@ const login: RequestHandler = async function (req, res) {
   let passwordMatched: boolean = await comparePassword(password, user.passwordHash);
   if (!passwordMatched) {
     res.json({
-      message: "邮箱或密码错误"
+      result: codeEmailPasswordMismatch
     });
     return;
   }
@@ -49,7 +53,7 @@ const login: RequestHandler = async function (req, res) {
     value: authkey
   });
   res.json({
-    message: "登陆成功",
+    result:  codeSuccess,
     authkey: authkey
   });
 };

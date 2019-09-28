@@ -15,12 +15,12 @@ const register: RequestHandler = async function (req, res) {
    * 验证邮箱地址格式（validator）
    */
 
-  const codeFail = 2;
-  const codeSuccess = 1;
+  const codeFail = false;
+  const codeSuccess = true;
 
   if (email === "" || password === "") {
     res.json({
-      message: codeFail
+      result: codeFail
     });
     return;
   }
@@ -28,7 +28,7 @@ const register: RequestHandler = async function (req, res) {
   let emailOk = checkEmailAvailabilty(email);
   if (!emailOk) {
     res.json({
-      message: codeFail
+      result: codeFail
     });
     return;
   }
@@ -38,7 +38,7 @@ const register: RequestHandler = async function (req, res) {
     passwordHash: await hashPassword(password)
   });
   res.json({
-    message: codeSuccess
+    result: codeSuccess
   });
 };
 

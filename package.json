@@ -7,7 +7,7 @@
   "author": "github.com/super-dash",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf bin/*",
+    "clean": "rm -rf ./bin && rm -rf ./log",
     "lint": "eslint src --ext .ts",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "watch \"yarn lint:fix\" src --wait 10",
@@ -28,6 +28,7 @@
     "@types/randomstring": "^1.1.6",
     "@types/sequelize": "^4.28.4",
     "@types/validator": "^10.11.3",
+    "@types/winston": "^2.4.4",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.4.0",
     "nodemon": "^1.19.2",

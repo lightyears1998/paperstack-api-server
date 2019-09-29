@@ -5,6 +5,9 @@ bin
 conf/*.yml
 !conf/*.example.yml
 
+# Runtime Information
+log/*
+
 # Node.js
 node_modules
 yarn-error.log

@@ -1,4 +1,5 @@
 import config from "./config";
+import { logger } from "./util";
 import router from "./route";
 
 import fs from "fs";
@@ -25,6 +26,6 @@ app.all("/", (req, res) => {
 app.use(router);
 
 app.listen(serverConfig.port, () => {
-  console.log(`PaperStack API服务器 v${version}`);
-  console.log(`正在监听${serverConfig.port}端口。`);
+  logger.info(`PaperStack API服务器 v${version}`);
+  logger.info(`正在监听${serverConfig.port}端口。`);
 });

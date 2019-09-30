@@ -1,3 +1,5 @@
+import { logger } from "./util";
+
 import yaml from "js-yaml";
 import fs from "fs";
 import path from "path";
@@ -31,7 +33,7 @@ function loadConfiguration(configPath: string = path.resolve(`${__dirname}/../co
   try {
     config = yaml.safeLoad(fs.readFileSync(path.resolve(configPath), "utf8"));
   } catch (err) {
-    console.log(err);
+    logger.error(err);
     process.exit(1);
   }
 

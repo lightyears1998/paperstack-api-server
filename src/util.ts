@@ -51,7 +51,7 @@ export async function hashPassword(password: string) : Promise<string> {
       passwordHash = hash;
     })
     .catch(reason => {
-      console.error(reason);
+      logger.error(reason);
     });
 
   return passwordHash;

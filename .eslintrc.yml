@@ -32,6 +32,8 @@ rules:
   linebreak-style:
     - warn
     - unix
+  no-console:
+    - warn
   no-trailing-spaces:
     - warn
   no-else-return:

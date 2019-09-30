@@ -1,3 +1,4 @@
+import { logger } from "./../util";
 import sequelize from "./../db";
 import Authkey from "./Authkey";
 
@@ -56,7 +57,7 @@ export async function hashPassword(password: string) : Promise<string> {
       passwordHash = hash;
     })
     .catch(reason => {
-      console.error(reason);
+      logger.error(reason);
     });
 
   return passwordHash;

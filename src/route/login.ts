@@ -1,5 +1,5 @@
 import { User, Authkey } from "./../model";
-import { comparePassword } from "../util";
+import { comparePassword } from "../model/User";
 
 import { RequestHandler } from "express";
 

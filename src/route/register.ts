@@ -1,4 +1,4 @@
-import { checkEmailAvailabilty, hashPassword } from "./../util";
+import { checkEmailAvailabilty, hashPassword } from "./../model/User";
 
 import { RequestHandler } from "express";
 import { User } from "../model";

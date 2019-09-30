@@ -15,7 +15,7 @@
     "build:watch": "yarn build --watch",
     "watch": "watch \"npm-run-all lint:fix build\" src --wait 10",
     "start": "node bin/app.js",
-    "start:dev": "nodemon bin/app.js --watch bin",
+    "start:dev": "nodemon bin/app.js --watch bin --delay 10",
     "test": "echo \"No test sepcified.\""
   },
   "devDependencies": {

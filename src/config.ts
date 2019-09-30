@@ -33,7 +33,8 @@ function loadConfiguration(configPath: string = path.resolve(`${__dirname}/../co
   try {
     config = yaml.safeLoad(fs.readFileSync(path.resolve(configPath), "utf8"));
   } catch (err) {
-    logger.error(err);
+    logger.error("加载配置文件失败！");
+    logger.error("请检查./conf/config.yml文件是否存在，其格式是否有误。");
     process.exit(1);
   }
 

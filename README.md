@@ -4,7 +4,7 @@
 
 ## 开发
 
-我们所使用的技术栈为：
+我们的服务器软件运行于Node.js 12，所使用的技术栈为：
 
 1. yarn
 2. TypeScript
@@ -15,6 +15,8 @@
 
 1. `yarn watch` 启动Watch服务，包括lint-watch和build-watch。
 2. `yarn start:dev` 启动开发服务器。
+3. `yarn build` 编译`src`文件夹下的TypeScript源代码。
+4. `yarn clean` 删除`bin`和`log`文件夹。
 
 ## 部署
 

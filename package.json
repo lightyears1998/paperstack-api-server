@@ -11,9 +11,9 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "watch \"yarn lint:fix\" src --wait 10",
-    "build": "babel src --extensions .ts --out-dir lib",
+    "build": "tsc",
     "build:watch": "yarn build --watch",
-    "watch": "watch \"npm-run-all lint:fix build\" src --wait 10",
+    "watch": "npm-run-all --parallel lint:watch build:watch",
     "start": "node lib/app.js",
     "start:dev": "nodemon lib/app.js --watch lib --delay 10",
     "test": "echo \"No test sepcified.\""
@@ -37,11 +37,6 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-typescript": "^7.6.0",
-    "@babel/register": "^7.6.0",
     "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",

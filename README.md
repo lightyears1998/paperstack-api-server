@@ -13,7 +13,7 @@
 
 ### 常用指令
 
-1. `yarn watch` 启动Watch服务，包括lint-watch和build-watch。
+1. `yarn lint:watch`和`yarn build:watch`
 2. `yarn start:dev` 启动开发服务器。
 3. `yarn build` 编译`src`文件夹下的TypeScript源代码。
 4. `yarn clean` 删除`bin`和`log`文件夹。

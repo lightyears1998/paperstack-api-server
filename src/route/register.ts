@@ -7,8 +7,8 @@ import { User } from "../model";
  * 注册新用户
  */
 const register: RequestHandler = async function (req, res) {
-  let email: string = typeof req.body.email === "string" ? req.body.email : "";
-  let password: string = typeof req.body.password === "string" ? req.body.password : "";
+  const email: string = typeof req.body.email === "string" ? req.body.email : "";
+  const password: string = typeof req.body.password === "string" ? req.body.password : "";
 
   /*
    * @TODO
@@ -25,7 +25,7 @@ const register: RequestHandler = async function (req, res) {
     return;
   }
 
-  let emailOk = checkEmailAvailabilty(email);
+  const emailOk = checkEmailAvailabilty(email);
   if (!emailOk) {
     res.json({
       result: codeFail

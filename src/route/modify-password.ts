@@ -5,9 +5,9 @@ import { RequestHandler } from "express";
 
 
 const modifyPassword: RequestHandler = async function (req, res) {
-  let authkey: string = typeof req.body.authkey === "string" ? req.body.authkey : "";
-  let oldPassword: string = typeof req.body.oldPassword === "string" ? req.body.oldPassword : "";
-  let newPassword: string = typeof req.body.newPassword === "string" ? req.body.newPassword : "";
+  const authkey: string = typeof req.body.authkey === "string" ? req.body.authkey : "";
+  const oldPassword: string = typeof req.body.oldPassword === "string" ? req.body.oldPassword : "";
+  const newPassword: string = typeof req.body.newPassword === "string" ? req.body.newPassword : "";
 
   if (authkey === "" || oldPassword === "" || newPassword === "") {
     res.json({
@@ -16,7 +16,7 @@ const modifyPassword: RequestHandler = async function (req, res) {
     return;
   }
 
-  let key: Authkey = await Authkey.findOne({
+  const key: Authkey = await Authkey.findOne({
     where: {
       value: authkey
     }
@@ -28,7 +28,7 @@ const modifyPassword: RequestHandler = async function (req, res) {
     return;
   }
 
-  let user = await User.findOne({
+  const user = await User.findOne({
     where: {
       id: key.userId
     }
@@ -40,7 +40,7 @@ const modifyPassword: RequestHandler = async function (req, res) {
     return;
   }
 
-  let passwordMatch: boolean = await comparePassword(oldPassword, user.passwordHash);
+  const passwordMatch: boolean = await comparePassword(oldPassword, user.passwordHash);
   if (!passwordMatch) {
     res.json({
       message: "修改失败"
@@ -48,7 +48,7 @@ const modifyPassword: RequestHandler = async function (req, res) {
     return;
   }
 
-  let newPasswordHash: string = await hashPassword(newPassword);
+  const newPasswordHash: string = await hashPassword(newPassword);
 
   user.update({
     passwordHash: newPasswordHash

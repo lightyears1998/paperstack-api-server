@@ -1,12 +1,10 @@
-# Compiled file
-bin
+# Compiled files and runtime files
+lib
+log
 
 # Configuration
 conf/*.yml
 !conf/*.example.yml
-
-# Runtime Information
-log/*
 
 # Node.js
 node_modules

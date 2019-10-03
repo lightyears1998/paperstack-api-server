@@ -34,11 +34,11 @@ User.init({
  * 检查邮箱地址是否已被注册
  * @param email 待检查的邮箱
  */
-export async function checkEmailAvailabilty(email: string) : Promise<boolean> {
+export async function checkEmailAvailabilty(email: string): Promise<boolean> {
   if (email === "") {
     return false;
   }
-  let emailCount: number = await User.count({ where: { email: { [Sequelize.Op.iLike]: email } } });
+  const emailCount: number = await User.count({ where: { email: { [Sequelize.Op.iLike]: email } } });
   return emailCount === 0;
 }
 
@@ -48,7 +48,7 @@ export async function checkEmailAvailabilty(email: string) : Promise<boolean> {
  * @param password 待哈希的密码
  * @returns 密码哈希
  */
-export async function hashPassword(password: string) : Promise<string> {
+export async function hashPassword(password: string): Promise<string> {
   const saltRounds = 10;
 
   let passwordHash = "";
@@ -70,7 +70,7 @@ export async function hashPassword(password: string) : Promise<string> {
  * @param hash 哈希
  * @returns 密码与哈希是否相符
  */
-export async function comparePassword(password, hash) : Promise<boolean> {
+export async function comparePassword(password, hash): Promise<boolean> {
   let result = false;
 
   await bcrypt.compare(password, hash)

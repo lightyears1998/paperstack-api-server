@@ -5,8 +5,8 @@ import { RequestHandler } from "express";
 
 
 const login: RequestHandler = async function (req, res) {
-  let email: string = typeof req.body.email === "string" ? req.body.email : "";
-  let password: string = typeof req.body.password === "string" ? req.body.password : "";
+  const email: string = typeof req.body.email === "string" ? req.body.email : "";
+  const password: string = typeof req.body.password === "string" ? req.body.password : "";
 
   const codeSuccess = 1;
   const codeEmailNotExist = 2;
@@ -40,7 +40,7 @@ const login: RequestHandler = async function (req, res) {
     return;
   }
 
-  let passwordMatched: boolean = await comparePassword(password, user.passwordHash);
+  const passwordMatched: boolean = await comparePassword(password, user.passwordHash);
   if (!passwordMatched) {
     res.json({
       result: codeEmailPasswordMismatch
@@ -48,7 +48,7 @@ const login: RequestHandler = async function (req, res) {
     return;
   }
 
-  let authkey: string = Authkey.generateNewKey();
+  const authkey: string = Authkey.generateNewKey();
   user.createAuthkey({
     value: authkey
   });

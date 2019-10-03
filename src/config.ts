@@ -7,19 +7,19 @@ import process from "process";
 
 
 interface Configuration {
-  server: ServerConfiguration,
-  database: DatabaseConfiguration
+  server: ServerConfiguration;
+  database: DatabaseConfiguration;
 }
 
 interface DatabaseConfiguration {
-  host: string,
-  user: string,
-  pass: string,
-  db: string
+  host: string;
+  user: string;
+  pass: string;
+  db: string;
 }
 
 interface ServerConfiguration {
-  port: Number
+  port: number;
 }
 
 

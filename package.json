@@ -14,7 +14,7 @@
     "build": "tsc",
     "build:watch": "yarn build --watch",
     "start": "node lib/app.js",
-    "start:dev": "nodemon lib/app.js --watch lib",
+    "start:dev": "nodemon --watch lib --delay 3",
     "test": "echo \"No test sepcified.\""
   },
   "devDependencies": {

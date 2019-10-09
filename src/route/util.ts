@@ -1,9 +1,9 @@
 class ResponseJSON {
   code: number
   message: string
-  result: Record<string, any>
+  result: Record<string, unknown>
 
-  constructor(code = 200, message = "请求处理完毕。", result: Record<string, any> = {}): void {
+  constructor(code = 200, message = "请求处理完毕。", result: Record<string, unknown> = {}) {
     this.code = code;
     this.message = message;
     this.result = result;
@@ -17,11 +17,11 @@ class ResponseJSON {
     this.message = message;
   }
 
-  setResult(result: Record<string, any>): void {
+  setResult(result: Record<string, unknown>): void {
     this.result = result;
   }
 
-  toJSON(): Record<string, any> {
+  toJSON(): Record<string, unknown> {
     return {
       code:    this.code,
       message: this.message,

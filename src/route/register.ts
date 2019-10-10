@@ -1,35 +1,30 @@
 import { checkEmailAvailabilty, hashPassword } from "./../model/User";
-
-import { RequestHandler } from "express";
 import { User } from "../model";
+import { ResponseCode, ResponseJSON } from "./util";
+import { RequestHandler } from "express";
+import { isEmail } from "validator";
+
 
 /**
  * 注册新用户
  */
 const register: RequestHandler = async function (req, res) {
-  const email: string = typeof req.body.email === "string" ? req.body.email : "";
-  const password: string = typeof req.body.password === "string" ? req.body.password : "";
+  const email = String(req.body.email);
+  const password = String(req.body.password) ;
 
-  /*
-   * @TODO
-   * 验证邮箱地址格式（validator）
-   */
+  if (!isEmail(email)) {
+    res.json(new ResponseJSON(ResponseCode.Failure, "注册失败，邮箱地址格式不正确。"));
+    return;
+  }
 
-  const codeFail = false;
-  const codeSuccess = true;
-
-  if (email === "" || password === "") {
-    res.json({
-      result: codeFail
-    });
+  if (password === "") {
+    res.json(new ResponseJSON(ResponseCode.PasswordEmpty, "注册失败，密码不能为空。"));
     return;
   }
 
   const emailOk = checkEmailAvailabilty(email);
   if (!emailOk) {
-    res.json({
-      result: codeFail
-    });
+    res.json(new ResponseJSON(ResponseCode.EmailAlreadyRegisterd, "注册失败，邮箱地址已被注册。"));
     return;
   }
 
@@ -37,9 +32,7 @@ const register: RequestHandler = async function (req, res) {
     email:        email,
     passwordHash: await hashPassword(password)
   });
-  res.json({
-    result: codeSuccess
-  });
+  res.json(new ResponseJSON(ResponseCode.Success, "注册成功。"));
 };
 
 

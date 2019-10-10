@@ -1,28 +1,25 @@
-import { User, Authkey } from "./../model";
+import { Authkey, User } from "./../model";
 import { comparePassword } from "../model/User";
+import { ResponseCode, ResponseJSON } from "./util";
 
 import { RequestHandler } from "express";
 
 
+/**
+ * 登录路由
+ */
 const login: RequestHandler = async function (req, res) {
-  const email: string = typeof req.body.email === "string" ? req.body.email : "";
-  const password: string = typeof req.body.password === "string" ? req.body.password : "";
+  const email = String(req.body.email);
+  const password = String(req.body.password) ;
 
-  const codeSuccess = 1;
-  const codeEmailNotExist = 2;
-  const codeEmailPasswordMismatch = 3;
 
   if (email === "") {
-    res.json({
-      result: codeEmailNotExist
-    });
+    res.json(new ResponseJSON(ResponseCode.EmailNotRegistered, "邮箱地址未注册。"));
     return;
   }
 
   if (password === "") {
-    res.json({
-      result: codeEmailPasswordMismatch
-    });
+    res.json(new ResponseJSON(ResponseCode.PasswordEmpty, "密码不能为空。"));
     return;
   }
 
@@ -34,17 +31,13 @@ const login: RequestHandler = async function (req, res) {
   }).then(res => user = res);
 
   if (user == null) {
-    res.json({
-      result: codeEmailNotExist
-    });
+    res.json(new ResponseJSON(ResponseCode.EmailNotRegistered, "邮箱地址未注册。"));
     return;
   }
 
   const passwordMatched: boolean = await comparePassword(password, user.passwordHash);
   if (!passwordMatched) {
-    res.json({
-      result: codeEmailPasswordMismatch
-    });
+    res.json(new ResponseJSON(ResponseCode.PasswordMismatch, "用户名与密码不匹配"));
     return;
   }
 
@@ -52,10 +45,13 @@ const login: RequestHandler = async function (req, res) {
   user.createAuthkey({
     value: authkey
   });
-  res.json({
-    result:  codeSuccess,
-    authkey: authkey
-  });
+  res.json(new ResponseJSON(
+    ResponseCode.Success,
+    "登录成功",
+    {
+      authkey: authkey
+    }
+  ));
 };
 
 

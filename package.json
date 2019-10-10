@@ -14,7 +14,7 @@
     "build": "tsc",
     "build:watch": "yarn build --watch",
     "start": "node lib/app.js",
-    "start:dev": "nodemon lib/app.js --watch lib",
+    "start:dev": "nodemon --watch lib --delay 3",
     "test": "echo \"No test sepcified.\""
   },
   "devDependencies": {
@@ -43,6 +43,7 @@
     "randomstring": "^1.1.5",
     "sequelize": "^5.19.0",
     "typescript": "^3.6.3",
+    "validator": "^11.1.0",
     "winston": "^3.2.1"
   }
 }

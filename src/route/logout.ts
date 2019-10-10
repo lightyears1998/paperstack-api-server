@@ -1,9 +1,10 @@
 import { Authkey } from "../model";
+import { ResponseJSON } from "./util";
 import { RequestHandler } from "express";
 
 
 const logout: RequestHandler = async function (req, res) {
-  const authkey: string = typeof req.body.authkey === "string" ? req.body.authkey : "";
+  const authkey = String(req.body.authkey);
 
   Authkey.destroy({
     where: {
@@ -11,7 +12,7 @@ const logout: RequestHandler = async function (req, res) {
     }
   });
 
-  res.json({});
+  res.json(ResponseJSON.buildSuccessResponse());
 };
 
 

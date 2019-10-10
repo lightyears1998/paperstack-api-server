@@ -1,4 +1,4 @@
-import { User, Authkey } from "./../model";
+import { Authkey, User } from "./../model";
 import { comparePassword, hashPassword } from "../model/User";
 import { ResponseCode, ResponseJSON } from "./util";
 

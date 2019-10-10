@@ -1,6 +1,6 @@
 import { checkEmailAvailabilty, hashPassword } from "./../model/User";
 import { User } from "../model";
-import { ResponseJSON, ResponseCode } from "./util";
+import { ResponseCode, ResponseJSON } from "./util";
 import { RequestHandler } from "express";
 import { isEmail } from "validator";
 

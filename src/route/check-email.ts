@@ -1,9 +1,8 @@
-import { checkEmailAvailabilty } from "../model/User";
-
-import { ResponseJSON } from "./ResponseJSON";
-
 import { RequestHandler } from "express";
 import { isEmail } from "validator";
+import { checkEmailAvailabilty } from "../model/User";
+import { ResponseJSON } from "./ResponseJSON";
+
 
 
 /**

@@ -1,8 +1,8 @@
-import { Authkey, User } from "./../model";
+import { RequestHandler } from "express";
 import { comparePassword, hashPassword } from "../model/User";
+import { Authkey, User } from "./../model";
 import { ResponseCode } from "./ResponseCode";
 import { ResponseJSON } from "./ResponseJSON";
-import { RequestHandler } from "express";
 
 
 const modifyPassword: RequestHandler = async function (req, res) {

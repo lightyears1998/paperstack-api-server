@@ -1,7 +1,6 @@
-import { Authkey } from "../model";
-
-import { ResponseJSON } from "./ResponseJSON";
 import { RequestHandler } from "express";
+import { Authkey } from "../model";
+import { ResponseJSON } from "./ResponseJSON";
 
 
 const logout: RequestHandler = async function (req, res) {

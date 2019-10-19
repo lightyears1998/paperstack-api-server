@@ -1,7 +1,7 @@
+import Sequelize from "sequelize";
 import { logger } from "./util";
 import config from "./config";
 
-import Sequelize from "sequelize";
 
 const dbconfig = config.database;
 

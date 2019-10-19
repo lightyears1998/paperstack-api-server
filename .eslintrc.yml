@@ -3,12 +3,16 @@ env:
   node: true
 parser: '@typescript-eslint/parser'
 parserOptions:
-  project: './tsconfig.json'
+  project: ./tsconfig.json
 plugins:
   - '@typescript-eslint'
+  - import
 extends:
-  - 'eslint:recommended'
-  - 'plugin:@typescript-eslint/recommended'
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:import/errors
+  - plugin:import/warnings
+  - plugin:import/typescript
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
@@ -151,4 +155,6 @@ rules:
     - warn
     - never
   wrap-regex:
+    - warn
+  import/order:
     - warn

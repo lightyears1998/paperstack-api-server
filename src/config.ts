@@ -1,9 +1,8 @@
-import { logger } from "./util";
-
-import yaml from "js-yaml";
 import fs from "fs";
 import path from "path";
 import process from "process";
+import yaml from "js-yaml";
+import { logger } from "./util";
 
 
 interface Configuration {

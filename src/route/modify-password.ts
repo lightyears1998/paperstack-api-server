@@ -1,7 +1,7 @@
 import { Authkey, User } from "./../model";
 import { comparePassword, hashPassword } from "../model/User";
-import { ResponseCode, ResponseJSON } from "./util";
-
+import { ResponseCode } from "./ResponseCode";
+import { ResponseJSON } from "./ResponseJSON";
 import { RequestHandler } from "express";
 
 

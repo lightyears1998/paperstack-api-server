@@ -1,5 +1,6 @@
 import { Authkey } from "../model";
-import { ResponseJSON } from "./util";
+
+import { ResponseJSON } from "./ResponseJSON";
 import { RequestHandler } from "express";
 
 

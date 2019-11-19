@@ -2,10 +2,17 @@ language: node_js
 node_js:
   - 12
 cache: yarn
-script:
-  - yarn lint
-  - yarn build
-  - yarn test
+jobs:
+  include:
+  - name: lint
+    script:
+    - yarn lint
+  - name: test
+    script:
+    - yarn build
+    - yarn test
+  allow_failures:
+  - name: lint
 notifications:
   webhooks:
     urls:

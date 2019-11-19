@@ -9,6 +9,7 @@
   "scripts": {
     "clean": "rm -rf ./lib && rm -rf ./log",
     "lint": "eslint src --ext .ts",
+    "lint:strict": "yarn lint --max-warnings 0",
     "lint:fix": "yarn lint --fix",
     "build": "tsc",
     "build:watch": "yarn build --watch",

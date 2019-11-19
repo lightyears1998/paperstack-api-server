@@ -6,7 +6,7 @@ jobs:
   include:
   - name: lint
     script:
-    - yarn lint
+    - yarn lint:strict
   - name: test
     script:
     - yarn build

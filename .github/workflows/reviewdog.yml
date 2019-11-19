@@ -9,6 +9,6 @@ jobs:
       - name: eslint
         uses: reviewdog/action-eslint@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKENS }}
+          github_token: ${{ secrets.REVIEWDOG_TOKEN }}
           reporter: github-pr-check
           eslint_flags: 'eslint src/ --ext .ts'

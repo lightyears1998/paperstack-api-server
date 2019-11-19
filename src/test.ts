@@ -1,5 +1,7 @@
-// This
- // should
-  // fail
-   // the
-    // lint
+/*
+ * This
+ * should
+ * fail
+ * the
+ * lint
+ */

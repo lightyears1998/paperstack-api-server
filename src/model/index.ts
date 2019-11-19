@@ -9,6 +9,6 @@ sequelize.sync();
 
 
 export {
-  User,
-  Authkey
+    User,
+    Authkey
 };

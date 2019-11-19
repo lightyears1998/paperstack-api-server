@@ -8,5 +8,5 @@ enum ResponseCode {
 }
 
 export {
-  ResponseCode
+    ResponseCode
 };

@@ -33,7 +33,7 @@ rules:
     - smart
   indent:
     - warn
-    - 2
+    - 4
   linebreak-style:
     - warn
     - unix

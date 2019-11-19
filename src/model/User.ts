@@ -17,14 +17,14 @@ class User extends Model {
 }
 
 User.init({
-  email: {
-    type:      Sequelize.STRING,
-    allowNull: false,
-    comment:   "邮箱地址，大小写不敏感" },
-  passwordHash: {
-    type:      Sequelize.STRING,
-    allowNull: false,
-    comment:   "密码哈希，大小写不敏感" }
+    email: {
+        type:      Sequelize.STRING,
+        allowNull: false,
+        comment:   "邮箱地址，大小写不敏感" },
+    passwordHash: {
+        type:      Sequelize.STRING,
+        allowNull: false,
+        comment:   "密码哈希，大小写不敏感" }
 }, { sequelize });
 
 
@@ -33,11 +33,11 @@ User.init({
  * @param email 待检查的邮箱
  */
 export async function checkEmailAvailabilty(email: string): Promise<boolean> {
-  if (email === "") {
-    return false;
-  }
-  const emailCount: number = await User.count({ where: { email: { [Sequelize.Op.iLike]: email } } });
-  return emailCount === 0;
+    if (email === "") {
+        return false;
+    }
+    const emailCount: number = await User.count({ where: { email: { [Sequelize.Op.iLike]: email } } });
+    return emailCount === 0;
 }
 
 
@@ -47,18 +47,18 @@ export async function checkEmailAvailabilty(email: string): Promise<boolean> {
  * @returns 密码哈希
  */
 export async function hashPassword(password: string): Promise<string> {
-  const saltRounds = 10;
+    const saltRounds = 10;
 
-  let passwordHash = "";
-  await bcrypt.hash(password, saltRounds)
-    .then((hash) => {
-      passwordHash = hash;
-    })
-    .catch(reason => {
-      logger.error(reason);
-    });
+    let passwordHash = "";
+    await bcrypt.hash(password, saltRounds)
+        .then((hash) => {
+            passwordHash = hash;
+        })
+        .catch(reason => {
+            logger.error(reason);
+        });
 
-  return passwordHash;
+    return passwordHash;
 }
 
 
@@ -69,14 +69,14 @@ export async function hashPassword(password: string): Promise<string> {
  * @returns 密码与哈希是否相符
  */
 export async function comparePassword(password, hash): Promise<boolean> {
-  let result = false;
+    let result = false;
 
-  await bcrypt.compare(password, hash)
-    .then((res) => {
-      result = res;
-    });
+    await bcrypt.compare(password, hash)
+        .then((res) => {
+            result = res;
+        });
 
-  return result;
+    return result;
 }
 
 

@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import { comparePassword } from "../model/User";
-import { Authkey, User } from "./../model";
+import { comparePassword } from "../entity/User";
+import { Authkey, User } from "../entity";
 import { ResponseCode } from "./ResponseCode";
 import { ResponseJSON } from "./ResponseJSON";
 

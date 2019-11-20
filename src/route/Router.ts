@@ -1,4 +1,6 @@
 /**
+ * 路由
+ * 
  * @todo 将Express.Router写入自定义Router的constructor
  */
 export abstract class Router {

@@ -1,7 +1,7 @@
 import * as randomstring from "randomstring";
 import * as Sequelize from "sequelize";
 import  { Model } from "sequelize";
-import sequelize from "./../db";
+import sequelize from "../Database";
 
 
 class Authkey extends Model {

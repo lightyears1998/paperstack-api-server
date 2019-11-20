@@ -1,4 +1,4 @@
-import sequelize from "../db";
+import sequelize from "../Database";
 import User from "./User";
 import Authkey from "./Authkey";
 

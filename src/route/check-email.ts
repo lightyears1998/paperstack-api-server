@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { isEmail } from "validator";
-import { checkEmailAvailabilty } from "../model/User";
+import { checkEmailAvailabilty } from "../entity/User";
 import { ResponseJSON } from "./ResponseJSON";
 
 

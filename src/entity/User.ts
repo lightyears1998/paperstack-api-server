@@ -1,11 +1,14 @@
 import * as Sequelize from "sequelize";
 import { Model, HasManyCreateAssociationMixin } from "sequelize";
 import * as bcrypt from "bcrypt";
-import { logger } from "./../util";
-import sequelize from "./../db";
+import { logger } from "../Utils";
+import sequelize from "../Database";
 import Authkey from "./Authkey";
 
 
+/**
+ * 用户
+ */
 class User extends Model {
   id: number;
   email: string;

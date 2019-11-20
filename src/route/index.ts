@@ -1,4 +1,5 @@
 import { Router as ExpressRouter } from "express";
+import Router from "./Router";
 import checkEmail from "./check-email";
 import register from "./register";
 import login from "./login";
@@ -15,11 +16,4 @@ router.post("/logout", logout);
 router.post("/modify/password", modifyPassword);
 
 export default router;
-
-/*
- * ^^ Old ^^
- * vv New vv
- */
-
-import { Router } from "./Router";
 export { Router };

@@ -10,7 +10,7 @@ export default abstract class Router {
     /**
      * 挂载路径
      */
-    private static path: string
+    public static path: string
 
     public static mount<T extends Router>(rootRouter: express.Express, path: string, router: new(req: express.Request, res: express.Response) => T) {
         rootRouter.all(path, async (req, res)=> {
@@ -57,5 +57,5 @@ export default abstract class Router {
     /**
      * 执行控制逻辑
      */
-    protected abstract process(): Record<string, string | boolean | number> 
+    protected abstract process(): Record<string, string | boolean | number>
 }

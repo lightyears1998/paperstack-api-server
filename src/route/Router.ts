@@ -1,19 +1,36 @@
+import * as express from "express";
+
+
 /**
  * 路由
  *
  * @todo 将Express.Router写入自定义Router的constructor
  */
-export abstract class Router {
+export default abstract class Router {
     /**
      * 挂载路径
      */
-    public path: string
+    private static path: string
+
+    public static mount<T extends Router>(rootRouter: express.Express, path: string, router: new(req: express.Request, res: express.Response) => T) {
+        rootRouter.all(path, async (req, res)=> {
+            const response = new router(req, res).handleRequest();
+            res.json(response);
+        });
+    }
+
+    constructor(req: express.Request, res: express.Response) {
+
+    }
 
     /**
      * 处理请求
      */
-    public handleRequest() {
-
+    public handleRequest(): Record<string, string | boolean | number> {
+        this.generateRequestId();
+        this.verifyRequestArgument();
+        this.getCurrentSessionUesr();
+        return this.process();
     }
 
     /**
@@ -40,5 +57,5 @@ export abstract class Router {
     /**
      * 执行控制逻辑
      */
-    protected abstract process(): void
+    protected abstract process(): Record<string, string | boolean | number> 
 }

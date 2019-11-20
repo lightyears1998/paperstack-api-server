@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
-import express from "express";
-import cors from "cors";
+import * as fs from "fs";
+import * as path from "path";
+import * as express from "express";
+import * as cors from "cors";
 import router from "./route";
 import { logger } from "./util";
 import config from "./config";

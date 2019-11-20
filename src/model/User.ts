@@ -1,5 +1,6 @@
-import Sequelize, { Model, HasManyCreateAssociationMixin } from "sequelize";
-import bcrypt from "bcrypt";
+import * as Sequelize from "sequelize";
+import { Model, HasManyCreateAssociationMixin } from "sequelize";
+import * as bcrypt from "bcrypt";
 import { logger } from "./../util";
 import sequelize from "./../db";
 import Authkey from "./Authkey";

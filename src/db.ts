@@ -1,4 +1,4 @@
-import Sequelize from "sequelize";
+import * as Sequelize from "sequelize";
 import { logger } from "./util";
 import config from "./config";
 

@@ -32,6 +32,8 @@ rules:
     - warn
     - smart
   indent:
+    - off
+  "@typescript-eslint/indent":
     - warn
     - 4
   linebreak-style:

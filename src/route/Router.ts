@@ -1,19 +1,19 @@
 /**
  * 路由
- * 
+ *
  * @todo 将Express.Router写入自定义Router的constructor
  */
 export abstract class Router {
     /**
      * 挂载路径
      */
-    public path: string 
+    public path: string
 
     /**
      * 处理请求
      */
-    public processRequest() {
-        
+    public handleRequest() {
+
     }
 
     /**
@@ -40,5 +40,5 @@ export abstract class Router {
     /**
      * 执行控制逻辑
      */
-    protected abstract execute(): void
+    protected abstract process(): void
 }

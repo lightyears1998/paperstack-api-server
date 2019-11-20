@@ -1,18 +1,18 @@
 import * as randomstring from "randomstring";
 import * as Sequelize from "sequelize";
-import  { Model } from "sequelize";
+import { Model } from "sequelize";
 import sequelize from "../Database";
 
 
 class Authkey extends Model {
-  value: string;
-  usedAt: Date;
+    value: string;
+    usedAt: Date;
 
-  userId: number;
+    userId: number;
 
-  static generateNewKey(): string {
-      return randomstring.generate(32);
-  }
+    static generateNewKey(): string {
+        return randomstring.generate(32);
+    }
 }
 
 Authkey.init({

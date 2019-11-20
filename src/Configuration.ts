@@ -6,19 +6,19 @@ import { logger } from "./Utils";
 
 
 interface Configuration {
-  server: ServerConfiguration;
-  database: DatabaseConfiguration;
+    server: ServerConfiguration;
+    database: DatabaseConfiguration;
 }
 
 interface DatabaseConfiguration {
-  host: string;
-  user: string;
-  pass: string;
-  db: string;
+    host: string;
+    user: string;
+    pass: string;
+    db: string;
 }
 
 interface ServerConfiguration {
-  port: number;
+    port: number;
 }
 
 

@@ -10,14 +10,14 @@ import Authkey from "./Authkey";
  * 用户
  */
 class User extends Model {
-  id: number;
-  email: string;
-  passwordHash: string;
+    id: number;
+    email: string;
+    passwordHash: string;
 
-  createdAt: Date;
-  updatedAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
 
-  createAuthkey: HasManyCreateAssociationMixin<Authkey>;
+    createAuthkey: HasManyCreateAssociationMixin<Authkey>;
 }
 
 User.init({

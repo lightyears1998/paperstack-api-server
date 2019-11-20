@@ -16,8 +16,10 @@ router.post("/modify/password", modifyPassword);
 
 export default router;
 
-// ^^ Old ^^
-// vv New vv
+/*
+ * ^^ Old ^^
+ * vv New vv
+ */
 
 import { Router } from "./Router";
 export { Router };

@@ -1,7 +1,7 @@
 import * as Sequelize from "sequelize";
 import { Model, HasManyCreateAssociationMixin } from "sequelize";
 import * as bcrypt from "bcrypt";
-import { logger } from "../util";
+import logger from "../logger";
 import sequelize from "../Database";
 import Authkey from "./Authkey";
 

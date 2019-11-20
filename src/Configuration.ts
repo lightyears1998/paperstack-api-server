@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as process from "process";
 import * as yaml from "js-yaml";
-import { logger } from "./util";
+import logger from "./logger";
 
 
 interface Configuration {

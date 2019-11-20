@@ -31,3 +31,6 @@ let lyrics = [
 let song = "去年夏天";
 
 let singer = '王大毛🐱';
+
+// For test purpose.
+let sum = 1 + 1

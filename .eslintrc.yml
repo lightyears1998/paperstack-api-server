@@ -35,8 +35,7 @@ rules:
     - warn
     - 4
   linebreak-style:
-    - warn
-    - unix
+    - off
   no-console:
     - warn
   no-trailing-spaces:

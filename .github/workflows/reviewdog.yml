@@ -6,13 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: eslint-review
-        uses: ./.github/actions/action-eslint
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          eslint_flags: 'src --ext .ts'
-      - name: eslint-check
+      - name: eslint-pr-check
         uses: ./.github/actions/action-eslint
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

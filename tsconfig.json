@@ -6,6 +6,8 @@
         "resolveJsonModule": true,
         "outDir": "lib",
         "inlineSourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
     },
     "include": [
         "src/**/*"

@@ -1,16 +1,18 @@
 name: reviewdog
 on: [ pull_request ]
 jobs:
-  eslint:
-    name: eslint via reviewdog
+  lint:
+    name: eslint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-python@v1
+      - name: eslint-review
+        uses: ./.github/actions/action-eslint
         with:
-          python-version: '3.x'
-          architecture: 'x64'
-      - name: eslint
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          eslint_flags: 'src --ext .ts'
+      - name: eslint-check
         uses: ./.github/actions/action-eslint
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

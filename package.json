@@ -1,8 +1,8 @@
 {
-    "name": "paperstack-api-server",
+    "name": "@super-dash/paperstack-api-server",
     "version": "0.1.4",
     "description": "作业收集平台PaperStack的API服务器",
-    "main": "lib/app.js",
+    "main": "lib/index.js",
     "repository": "https://github.com/super-dash/paperstack-api-server.git",
     "author": "github.com/super-dash",
     "license": "MIT",
@@ -13,8 +13,8 @@
         "lint:fix": "yarn lint --fix",
         "build": "tsc",
         "build:watch": "yarn build --watch",
-        "start": "node lib/app.js",
-        "start:dev": "ts-node src/app.ts",
+        "start": "node lib",
+        "start:dev": "ts-node src",
         "start:watch": "nodemon --watch lib --delay 3",
         "test": "echo \"No test sepcified.\""
     },
@@ -31,7 +31,8 @@
         "@typescript-eslint/parser": "^2",
         "eslint": "^6",
         "eslint-plugin-import": "^2",
-        "nodemon": "^1"
+        "nodemon": "^1",
+        "ts-node": "^8.5.2"
     },
     "dependencies": {
         "bcrypt": "3.0.6",

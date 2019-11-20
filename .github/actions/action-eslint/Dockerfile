@@ -1,8 +1,13 @@
 FROM node:current-alpine
 
 # Install python
-RUN sudo apt-get update
-RUN sudo apt-get install python
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+  && pip install virtualenv \
+  && rm -rf /var/cache/apk/*
 
 RUN wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b /usr/local/bin/ v0.9.13
 RUN apk --update add jq git && \

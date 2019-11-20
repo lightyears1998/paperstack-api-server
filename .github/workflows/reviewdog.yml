@@ -11,7 +11,7 @@ jobs:
           python-version: '3.x'
           architecture: 'x64'
       - name: eslint
-        uses: reviewdog/action-eslint@v1
+        uses: ./.github/actions/action-eslint
         with:
           github_token: ${{ secrets.REVIEWDOG_TOKEN }}
           reporter: github-pr-check

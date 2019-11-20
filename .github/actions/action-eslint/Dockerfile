@@ -1,5 +1,9 @@
 FROM node:current-alpine
 
+# Install python
+RUN sudo apt-get update
+RUN sudo apt-get install python
+
 RUN wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b /usr/local/bin/ v0.9.13
 RUN apk --update add jq git && \
     rm -rf /var/lib/apt/lists/* && \

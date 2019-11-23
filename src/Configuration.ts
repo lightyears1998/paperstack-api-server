@@ -5,41 +5,34 @@ import * as yaml from "js-yaml";
 import logger from "./logger";
 
 
-interface Configuration {
-    server: ServerConfiguration;
-    database: DatabaseConfiguration;
+export interface ServerConfiguration {
+    port: number;
 }
 
-interface DatabaseConfiguration {
+
+export interface DatabaseConfiguration {
     host: string;
     user: string;
     pass: string;
     db: string;
 }
 
-interface ServerConfiguration {
-    port: number;
-}
 
+export default class Configuration {
+    server: ServerConfiguration;
+    database: DatabaseConfiguration;
 
-/**
- * 从文件中加载配置。
- * @param configPath 配置文件的路径
- */
-function loadConfiguration(configPath: string = path.resolve(`${__dirname}/../conf/config.yml`)): Configuration {
-    let config: Configuration;
+    static load(configPath: string = path.resolve(`${__dirname}/../conf/config.yml`)): Configuration {
+        let config: Configuration;
 
-    try {
-        config = yaml.safeLoad(fs.readFileSync(path.resolve(configPath), "utf8"));
-    } catch (err) {
-        logger.error("加载配置文件失败！");
-        logger.error("请检查./conf/config.yml文件是否存在，其格式是否有误。");
-        process.exit(1);
+        try {
+            config = yaml.safeLoad(fs.readFileSync(path.resolve(configPath), "utf8"));
+        } catch (err) {
+            logger.error("加载配置文件失败！");
+            logger.error(`请检查${configPath}文件是否存在，其格式是否有误。`);
+            process.exit(1);
+        }
+
+        return config;
     }
-
-    return config;
 }
-
-const config = loadConfiguration();
-
-export default config;

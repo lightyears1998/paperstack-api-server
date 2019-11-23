@@ -11,6 +11,7 @@ export default abstract class Router {
      * 挂载路径
      */
     public static path: string
+    private req: express.Request;
 
     public static mount<T extends Router>(rootRouter: express.Express, path: string, router: new(req: express.Request, res: express.Response) => T) {
         rootRouter.all(path, async (req, res)=> {
@@ -19,8 +20,8 @@ export default abstract class Router {
         });
     }
 
-    constructor(req: express.Request, res: express.Response) {
-
+    constructor(req: express.Request) {
+        this.req = req;
     }
 
     /**

@@ -3,9 +3,10 @@ import * as path from "path";
 import { Server } from "http";
 import * as express from "express";
 import * as cors from "cors";
-import router from "./route";
+import * as routers from "./route";
 import logger from "./logger";
-import config from "./Configuration";
+import RootRouter from "./route/RootRouter";
+import Configuration from "./Configuration";
 
 
 /**
@@ -14,19 +15,16 @@ import config from "./Configuration";
 export class CentralControl {
     private static isActive = false;
 
-    private httpServer: Server;
-    private rootRouter: express.Express;
+    private config: Configuration;
+    private rootRouter: RootRouter;
 
     public constructor() {
-        this.rootRouter = express();
+        this.config = Configuration.load();
+        this.rootRouter = new RootRouter(this.config.server);
 
-        this.rootRouter.use(cors());
-        this.rootRouter.use(express.json());
-
-        /**
-         * 向根路由上挂载路由节点。
-         * @todo 搬迁Router.mount()静态方法到此处。
-         */
+        // 为端点挂载路由。
+        this.rootRouter.mount("/", routers.WelcomeRouter);
+        this.rootRouter.mount("/welcome", routers.WelcomeRouter);
     }
 
     /**
@@ -41,14 +39,14 @@ export class CentralControl {
     }
 
     public start(): void {
-
+        this.rootRouter.start();
     }
 
     /**
      * 从磁盘上加载配置文件并重新启动。
      */
     public restart(): void {
-
+        this.rootRouter.stop();
     }
 
     /**
@@ -60,25 +58,5 @@ export class CentralControl {
 }
 
 
-const serverConfig = config.server;
-const app = express();
-
-
-
-app.all("/", (req, res) => {
-    res.json({
-        "message": "欢迎使用PaperStack API Server。",
-        "version": "appVersion"
-    });
-});
-
-const appVersion = 23;
-
-app.use(router);
-
-app.listen(serverConfig.port, () => {
-    logger.info(`PaperStack API服务器 v${appVersion}`);
-    logger.info(`正在监听${serverConfig.port}端口。`);
-});
-
+const app = new CentralControl();
 export default app;

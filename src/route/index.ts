@@ -7,13 +7,14 @@ import logout from "./logout";
 import modifyPassword from "./modify-password";
 
 
-const router = ExpressRouter();
+// const router = ExpressRouter();
 
-router.post("/check/email", checkEmail);
-router.post("/register", register);
-router.post("/login", login);
-router.post("/logout", logout);
-router.post("/modify/password", modifyPassword);
+/*
+ * router.post("/check/email", checkEmail);
+ * router.post("/register", register);
+ * router.post("/login", login);
+ * router.post("/logout", logout);
+ * router.post("/modify/password", modifyPassword);
+ */
 
-export default router;
-export { Router };
+export { WelcomeRouter } from "./WelcomeRouter";

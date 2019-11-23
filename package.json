@@ -13,9 +13,10 @@
         "lint:fix": "yarn lint --fix",
         "build": "tsc",
         "build:watch": "yarn build --watch",
-        "start": "node lib",
-        "start:dev": "ts-node src",
-        "start:watch": "nodemon --watch lib --delay 3",
+        "start": "cross-env NODE_ENV=production node lib",
+        "start:dev": "cross-env NODE_ENV=development ts-node src",
+        "start:dev:watch": "cross-env NODE_ENV=development nodemon --watch lib --delay 3",
+        "start:dev:online": "corss-env NODE_ENV=development:online ts-node src",
         "test": "echo \"No test sepcified.\""
     },
     "devDependencies": {
@@ -37,6 +38,7 @@
     "dependencies": {
         "bcrypt": "3.0.6",
         "cors": "^2",
+        "cross-env": "^6.0.3",
         "express": "^4",
         "js-yaml": "^3",
         "pg": "^7",

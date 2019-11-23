@@ -43,7 +43,7 @@
         "js-yaml": "^3",
         "pg": "^7",
         "pg-hstore": "^2",
-        "randomstring": "^1",
+        "randomstring": "^1.1.5",
         "reflect-metadata": "^0.1.13",
         "sequelize": "^5",
         "sqlite3": "^4.1.0",

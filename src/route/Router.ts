@@ -1,4 +1,6 @@
 import * as express from "express";
+import { generate as randomString } from "randomstring";
+import logger from "../logger";
 
 
 /**
@@ -7,20 +9,12 @@ import * as express from "express";
  * @todo 将Express.Router写入自定义Router的constructor
  */
 export default abstract class Router {
-    /**
-     * 挂载路径
-     */
-    public static path: string
+    private path: string
     private req: express.Request;
+    private requestId: string;
 
-    public static mount<T extends Router>(rootRouter: express.Express, path: string, router: new(req: express.Request, res: express.Response) => T) {
-        rootRouter.all(path, async (req, res)=> {
-            const response = new router(req, res).handleRequest();
-            res.json(response);
-        });
-    }
-
-    constructor(req: express.Request) {
+    constructor(path: string, req: express.Request) {
+        this.path = path;
         this.req = req;
     }
 
@@ -31,6 +25,7 @@ export default abstract class Router {
         this.generateRequestId();
         this.verifyRequestArgument();
         this.getCurrentSessionUesr();
+        logger.info(`[${this.path}] (${this.requestId})`);
         return this.process();
     }
 
@@ -38,7 +33,7 @@ export default abstract class Router {
      * 生成请求Id
      */
     protected generateRequestId() {
-
+        this.requestId = randomString({readable: true, length: 5});
     }
 
     /**

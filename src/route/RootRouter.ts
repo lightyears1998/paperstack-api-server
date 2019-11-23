@@ -2,7 +2,7 @@ import { Server } from "http";
 import * as express from "express";
 import * as cors from "cors";
 import { ServerConfiguration } from "../Configuration";
-import logger from "../logger";
+import logger from "../Logger";
 import app from "../CentralControl";
 import Router from "./Router";
 

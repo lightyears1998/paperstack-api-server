@@ -1,6 +1,6 @@
 import * as express from "express";
 import { generate as randomString } from "randomstring";
-import logger from "../logger";
+import logger from "../Logger";
 
 
 /**
@@ -33,7 +33,7 @@ export default abstract class Router {
      * 生成请求Id
      */
     protected generateRequestId() {
-        this.requestId = randomString({readable: true, length: 5});
+        this.requestId = randomString({ readable: true, length: 5 });
     }
 
     /**

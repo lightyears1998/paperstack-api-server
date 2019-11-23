@@ -1,5 +1,5 @@
 import * as Sequelize from "sequelize";
-import logger from "./logger";
+import logger from "./Logger";
 import config from "./Configuration";
 
 

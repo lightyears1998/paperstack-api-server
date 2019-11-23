@@ -4,7 +4,7 @@ import { Server } from "http";
 import * as express from "express";
 import * as cors from "cors";
 import * as routers from "./route";
-import logger from "./logger";
+import logger from "./Logger";
 import RootRouter from "./route/RootRouter";
 import Configuration from "./Configuration";
 

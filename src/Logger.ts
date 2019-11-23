@@ -1,4 +1,20 @@
+import * as path from "path";
+import * as fs from "fs-extra";
 import * as winston from "winston";
+
+let logPath: string;
+switch (process.env.NODE_ENV) {
+    default:
+    case "production": {
+        logPath = path.resolve(__dirname, "../var/log")
+    }
+    case "development": 
+    case "development:online":{
+        logPath = path.resolve(__dirname, "../var/log");
+    }
+}
+
+fs.ensureDir(logPath);
 
 
 /**
@@ -12,8 +28,8 @@ const logger = winston.createLogger({
         }),
         winston.format.json()),
     transports: [
-        new winston.transports.File({ filename: "log/combined.log", maxFiles: 10, maxsize: 1024 }),
-        new winston.transports.File({ filename: "log/error.log", level: "error", maxFiles: 10, maxsize: 1024 })
+        new winston.transports.File({ filename: `${logPath}/combined.log`, maxFiles: 10, maxsize: 1024 }),
+        new winston.transports.File({ filename: `${logPath}/error.log`, level: "error", maxFiles: 10, maxsize: 1024 })
     ]
 });
 

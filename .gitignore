@@ -1,6 +1,6 @@
 # Compiled files and runtime files
 lib
-log
+var
 
 # Configuration
 conf/*.yml

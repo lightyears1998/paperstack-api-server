@@ -1,4 +1,4 @@
-import sequelize from "../db";
+import sequelize from "../Database";
 import User from "./User";
 import Authkey from "./Authkey";
 
@@ -9,6 +9,6 @@ sequelize.sync();
 
 
 export {
-  User,
-  Authkey
+    User,
+    Authkey
 };

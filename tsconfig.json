@@ -1,12 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
-    "outDir": "lib",
-    "esModuleInterop": true,
-    "inlineSourceMap": true,
-  },
-  "include": [
-    "src/**/*"
-  ]
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "outDir": "lib",
+        "inlineSourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
+    },
+    "include": [
+        "src/**/*"
+    ]
 }

@@ -32,9 +32,10 @@ rules:
     - warn
     - smart
   indent:
+    - off
+  "@typescript-eslint/indent":
     - warn
-    - 2
-  # Use .gitattributes to normalize linebreak.
+    - 4
   linebreak-style:
     - off
   no-console:

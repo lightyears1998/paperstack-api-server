@@ -11,6 +11,8 @@
 3. Express.js
 4. Sequelize
 
+请参阅：[开发者注记](docs/developer.md)
+
 ### 常用指令
 
 1. `yarn lint:watch`和`yarn build:watch`

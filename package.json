@@ -1,5 +1,6 @@
 {
     "name": "@super-dash/paperstack-api-server",
+    "private": true,
     "version": "0.1.4",
     "description": "作业收集平台PaperStack的API服务器",
     "main": "lib/index.js",

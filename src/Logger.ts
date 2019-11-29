@@ -6,10 +6,10 @@ let logPath: string;
 switch (process.env.NODE_ENV) {
     default:
     case "production": {
-        logPath = path.resolve(__dirname, "../var/log")
+        logPath = path.resolve(__dirname, "../var/log");
     }
-    case "development": 
-    case "development:online":{
+    case "development":
+    case "development:online": {
         logPath = path.resolve(__dirname, "../var/log");
     }
 }

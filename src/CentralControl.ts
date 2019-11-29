@@ -7,6 +7,7 @@ import * as routers from "./route";
 import logger from "./Logger";
 import RootRouter from "./route/RootRouter";
 import Configuration from "./Configuration";
+import Database from "./Database";
 
 
 /**
@@ -17,15 +18,7 @@ export class CentralControl {
 
     private config: Configuration;
     private rootRouter: RootRouter;
-
-    public constructor() {
-        this.config = Configuration.load();
-        this.rootRouter = new RootRouter(this.config.server);
-
-        // 为端点挂载路由。
-        this.rootRouter.mount("/", routers.WelcomeRouter);
-        this.rootRouter.mount("/welcome", routers.WelcomeRouter);
-    }
+    private database: Database;
 
     /**
      * 获取软件的版本号。
@@ -38,22 +31,62 @@ export class CentralControl {
         return packageJSON.version;
     }
 
-    public start(): void {
-        this.rootRouter.start();
+    /**
+     * 从文件中加载配置。
+     */
+    private loadConfigurationFromFile() {
+        this.config = Configuration.load();
     }
 
     /**
-     * 从磁盘上加载配置文件并重新启动。
+     * 挂载路由。
      */
-    public restart(): void {
-        this.rootRouter.stop();
+    private mountRouters() {
+        // 挂载根路由。
+        this.rootRouter = new RootRouter(this.config.server);
+
+        // 为端点挂载路由。
+        this.rootRouter.mount("/", routers.WelcomeRouter);
+        this.rootRouter.mount("/welcome", routers.WelcomeRouter);
+    }
+
+    /**
+     * 启动服务。
+     */
+    public async start(): Promise<void> {
+        if (!CentralControl.isActive) {
+            this.loadConfigurationFromFile();
+
+            this.database = new Database(this.config.database);
+            await this.database.start();
+
+            this.mountRouters();
+            this.rootRouter.start();
+        }
+        CentralControl.isActive = true;
     }
 
     /**
      * 停止服务。
      */
-    public stop(): void {
+    public async stop(): Promise<void> {
+        if (CentralControl.isActive) {
+            this.database.stop();
+            this.rootRouter.stop();
+        }
+        CentralControl.isActive = false;
+    }
 
+    /**
+     * 从磁盘上加载配置文件并重新启动。
+     */
+    public async restart(): Promise<void> {
+        if (CentralControl.isActive) {
+            await this.stop();
+            await this.start();
+        } else {
+            await this.start();
+        }
     }
 }
 

@@ -5,8 +5,6 @@ import Authkey from "./Authkey";
 
 User.hasMany(Authkey, { foreignKey: "userId" });
 
-sequelize.sync();
-
 
 export {
     User,

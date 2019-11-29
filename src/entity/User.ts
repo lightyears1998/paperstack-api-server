@@ -1,15 +1,15 @@
-import * as Sequelize from "sequelize";
-import { Model, HasManyCreateAssociationMixin } from "sequelize";
+import { Entity, PrimaryGeneratedColumn, Column  } from "typeorm";
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
-import sequelize from "../Database";
 import Authkey from "./Authkey";
 
 
 /**
  * 用户
  */
-class User extends Model {
+@Entity()
+export class User {
+    @PrimaryGeneratedColumn("increment")
     id: number;
     email: string;
     passwordHash: string;

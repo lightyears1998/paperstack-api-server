@@ -1,18 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Generated } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Generated, OneToMany } from "typeorm";
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
-import Authkey from "./Authkey";
+import { Session } from "./";
+
+
+export enum UserType {
+    "Administrator",
+    "Student",
+    "Teacher"
+}
 
 
 /**
  * 用户
  */
-export abstract class User {
-    @PrimaryGeneratedColumn("increment")
+@Entity()
+export class User {
+    @PrimaryGeneratedColumn("uuid")
     id: number;
-
-    @Generated("uuid")
-    uuid: string;
 
     @Column()
     email: string;
@@ -25,6 +30,33 @@ export abstract class User {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @Column()
+    type: UserType;
+
+    @OneToMany(type => Session, session => session.user)
+    sessions: Session[];
+
+    /**
+     * 修改密码。
+     * @param newPassword 新密码
+     */
+    modifyPassword(newPassword: string): void {
+
+    }
+
+    /**
+     * 验证密码是否正确。
+     * @param password 待验证的密码
+     */
+    verifyPassword(password: string): boolean {
+        return false;
+    }
+
+    // 新建用户会话。
+    newSession() {
+
+    }
 }
 
 

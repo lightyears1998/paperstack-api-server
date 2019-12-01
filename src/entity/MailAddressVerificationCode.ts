@@ -7,7 +7,7 @@ import { Entity, CreateDateColumn, Column, PrimaryGeneratedColumn } from "typeor
 @Entity()
 export class MailAddressVerificationCode {
     @PrimaryGeneratedColumn("uuid")
-    uuid: string
+    id: string
 
     @Column()
     email: string
@@ -27,6 +27,6 @@ export class MailAddressVerificationCode {
 
 
     public isExpired(): boolean {
-        return new Date().getTime() - this.createAt.getTime() > this.expirationInMiliseconds;
+        return new Date().getTime() - this.createAt.getTime() < this.expirationInMiliseconds;
     }
 }

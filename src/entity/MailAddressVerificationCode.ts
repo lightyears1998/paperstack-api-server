@@ -1,4 +1,4 @@
-import { Entity, CreateDateColumn, Column } from "typeorm";
+import { Entity, CreateDateColumn, Column, PrimaryGeneratedColumn } from "typeorm";
 
 
 /**
@@ -6,6 +6,9 @@ import { Entity, CreateDateColumn, Column } from "typeorm";
  */
 @Entity()
 export class MailAddressVerificationCode {
+    @PrimaryGeneratedColumn("uuid")
+    uuid: string
+
     @Column()
     email: string
 
@@ -15,7 +18,15 @@ export class MailAddressVerificationCode {
     @CreateDateColumn()
     createAt: Date
 
-    public isExpired() {
+    /**
+     * 邮箱地址验证码的有效期
+     *
+     * 默认值为1000 * 60 * 60 * 24毫秒，即24小时。
+     */
+    expirationInMiliseconds = 1000 * 60 * 60 * 24;
 
+
+    public isExpired(): boolean {
+        return new Date().getTime() - this.createAt.getTime() > this.expirationInMiliseconds;
     }
 }

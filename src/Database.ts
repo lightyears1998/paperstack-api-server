@@ -14,7 +14,7 @@ export default class Database {
     private config: DatabaseConfiguration
 
     private dbEntities = [
-        entities.Administrator
+        entities.Administrator, entities.MailAddressVerificationCode
     ]
 
     private offlineDevConfig: typeorm.ConnectionOptions = {

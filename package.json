@@ -19,7 +19,8 @@
         "start:dev": "cross-env NODE_ENV=development ts-node src",
         "start:dev:watch": "cross-env NODE_ENV=development nodemon src/index.ts --watch src",
         "start:dev:online": "corss-env NODE_ENV=development:online ts-node src",
-        "test": "cross-env NODE_ENV=development ts-mocha src/*.test.ts src/**/*.test.ts"
+        "test": "cross-env NODE_ENV=development ts-mocha",
+        "test:all": "cross-env NODE_ENV=development ts-mocha src/*.test.ts src/**/*.test.ts"
     },
     "devDependencies": {
         "@types/bcrypt": "^3",

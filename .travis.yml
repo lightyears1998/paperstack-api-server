@@ -9,9 +9,9 @@ jobs:
     - yarn lint:strict
   - name: test
     script:
-    - cp conf/config.example.yml conf/config.yml
+    - cp conf/config.travis.yml conf/config.yml
     - yarn build
-    - yarn test
+    - yarn test:all
   allow_failures:
   - name: lint
 notifications:

@@ -9,6 +9,7 @@ jobs:
     - yarn lint:strict
   - name: test
     script:
+    - cp conf/config.example.yml conf/config.yml
     - yarn build
     - yarn test
   allow_failures:

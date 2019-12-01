@@ -116,9 +116,6 @@ rules:
     - always
   no-lonely-if:
     - warn
-  multiline-comment-style:
-    - warn
-    - starred-block
   no-whitespace-before-property:
     - warn
   object-curly-spacing:

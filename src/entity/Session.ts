@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, UpdateDateColumn } from "typeorm";
+import * as randomstring from "randomstring";
 import { User } from "./";
 
 /**
@@ -24,6 +25,10 @@ export class Session {
      * 默认值为1000 * 60 * 60 * 24 * 7毫秒，即7天。
      */
     expirationInMiliseconds = 1000 * 60 * 60 * 24 * 7;
+
+    public constructor() {
+        this.token = randomstring.generate(32);
+    }
 
     /**
      * 检查用户会话是否在有效期内。

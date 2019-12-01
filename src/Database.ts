@@ -19,7 +19,7 @@ export default class Database {
     ]
 
     private offlineDevConfig: typeorm.ConnectionOptions = {
-        name:        "main",
+        name:        "default",
         type:        "sqlite",
         database:    path.resolve(__dirname, "../var/main.sqlite3"),
         entities:    this.dbEntities,

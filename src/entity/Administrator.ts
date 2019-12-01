@@ -1,5 +1,5 @@
 import { Entity, PrimaryColumn, OneToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
-import User from "./User";
+import { User } from "./";
 
 /**
  * 管理员

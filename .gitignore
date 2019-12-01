@@ -5,6 +5,7 @@ var
 # Configuration
 conf/*.yml
 !conf/*.example.yml
+!conf/*.travis.yml
 
 # Node.js
 node_modules

@@ -1,19 +1,19 @@
-import { RequestHandler } from "express";
-import { Authkey } from "../entity";
-import { ResponseJSON } from "./ResponseJSON";
+// import { RequestHandler } from "express";
+// import { Authkey } from "../entity";
+// import { ResponseJSON } from "./ResponseJSON";
 
 
-const logout: RequestHandler = async function (req, res) {
-    const authkey = String(req.body.authkey);
+// const logout: RequestHandler = async function (req, res) {
+//     const authkey = String(req.body.authkey);
 
-    Authkey.destroy({
-        where: {
-            value: authkey
-        }
-    });
+//     Authkey.destroy({
+//         where: {
+//             value: authkey
+//         }
+//     });
 
-    res.json(ResponseJSON.buildSuccessResponse());
-};
+//     res.json(ResponseJSON.buildSuccessResponse());
+// };
 
 
-export default logout;
+// export default logout;

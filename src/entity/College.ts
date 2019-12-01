@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryColumn, OneToMany } from "typeorm";
+import { ClassAndGrade } from "./";
 
 /**
  * 学院
@@ -7,4 +8,7 @@ import { Entity, PrimaryColumn } from "typeorm";
 export class College {
     @PrimaryColumn()
     name: string;
+
+    @OneToMany(type => ClassAndGrade, classes => classes.college)
+    classes: ClassAndGrade
 }

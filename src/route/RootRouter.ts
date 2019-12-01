@@ -1,6 +1,6 @@
 import { Server } from "http";
-import * as express from "express";
-import * as cors from "cors";
+import express from "express";
+import cors from "cors";
 import { ServerConfiguration } from "../Configuration";
 import logger from "../Logger";
 import app from "../CentralControl";
@@ -32,21 +32,21 @@ export default class RootRouter {
      * @param path URI路径
      * @param router 待挂载的路由
      */
-    public mount<T extends Router>(path: string, routerType: new(path: string, req: express.Request) => T) {
+    public mount<T extends Router>(path: string, routerType: new(path: string, req: express.Request) => T): void {
         this.expressRouter.all(path, async (req, res)=> {
             const response = new routerType(path, req).handleRequest();
             res.json(response);
         });
     }
 
-    public start() {
+    public start(): void {
         this.httpServer = this.expressRouter.listen(this.config.port, () => {
             logger.info(`PaperStack API服务器 v${app.version}`);
             logger.info(`正在监听${this.config.port}端口。`);
         });
     }
 
-    public stop() {
+    public stop(): void {
         this.httpServer.close();
     }
 }

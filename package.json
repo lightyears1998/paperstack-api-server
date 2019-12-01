@@ -19,7 +19,7 @@
         "start:dev": "cross-env NODE_ENV=development ts-node src",
         "start:dev:watch": "cross-env NODE_ENV=development nodemon src/index.ts --watch src",
         "start:dev:online": "corss-env NODE_ENV=development:online ts-node src",
-        "test": "cross-env NODE_ENV=development mocha -r ts-node/register src/**.test.ts"
+        "test": "cross-env NODE_ENV=development ts-mocha src/**/*.test.ts"
     },
     "devDependencies": {
         "@types/bcrypt": "^3",
@@ -36,11 +36,13 @@
         "@typescript-eslint/eslint-plugin": "^2",
         "@typescript-eslint/parser": "^2",
         "chai": "^4.2.0",
+        "chai-http": "^4.3.0",
         "eslint": "^6",
         "eslint-plugin-import": "^2",
         "eslint-watch": "^6.0.1",
         "mocha": "^6.2.2",
         "nodemon": "^2.0.1",
+        "ts-mocha": "^6.0.0",
         "ts-node": "^8.5.2"
     },
     "dependencies": {

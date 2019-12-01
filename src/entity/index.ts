@@ -13,4 +13,4 @@ export { Product } from "./Product";
 export { ProductComment } from "./ProductComment";
 
 export { College } from "./College";
-export { Class } from "./Class";
+export { ClassAndGrade } from "./ClassAndGrade";

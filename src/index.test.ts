@@ -1,23 +1,22 @@
-import "reflect-metadata";
-import { getManager } from "typeorm";
+import { describe, it } from "mocha";
+import chai from "chai";
+import chaiHttp from "chai-http";
 import app from "./CentralControl";
-import { User, UserType, Session } from "./entity";
 
-app.start();
+chai.use(chaiHttp);
 
-setTimeout(async () => {
-    const user = new User();
-    user.email = "432423@qq.com";
-    user.passwordHash = "7k7k7";
-    user.type = UserType.Administrator;
+describe("App, CentralControl and WelcomRouter", async () => {
+    it("should start", async () => {
+        await app.start();
+    });
 
-    const session = new Session();
-    user.sessions = [session];
+    it("should print welcome message", async () => {
+        await chai.request(app.URI).get("/").then((res) => {
+            chai.expect(res.body.version === app.version);
+        });
+    });
 
-    const manager = getManager();
-    await manager.save(user);
-    await manager.save(session);
-
-    await manager.remove(session);
-    await manager.remove(user);
-}, 1000);
+    it("should stop", async () => {
+        await app.stop();
+    });
+});

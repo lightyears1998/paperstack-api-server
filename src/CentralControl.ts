@@ -1,10 +1,7 @@
+import "reflect-metadata";
 import * as fs from "fs";
 import * as path from "path";
-import { Server } from "http";
-import * as express from "express";
-import * as cors from "cors";
 import * as routers from "./route";
-import logger from "./Logger";
 import RootRouter from "./route/RootRouter";
 import Configuration from "./Configuration";
 import Database from "./Database";
@@ -29,6 +26,13 @@ export class CentralControl {
         const packageJSONPath = path.resolve(`${__dirname}/../package.json`);
         const packageJSON = JSON.parse(fs.readFileSync(packageJSONPath, "utf8"));
         return packageJSON.version;
+    }
+
+    /**
+     * 获取服务器的URI。
+     */
+    public get URI() {
+        return `http://localhost:${this.config.server.port}`;
     }
 
     /**

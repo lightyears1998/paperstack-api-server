@@ -5,6 +5,7 @@ import Configuration, { DatabaseConfiguration } from "./Configuration";
 import logger from "./Logger";
 
 
+
 /**
  * 数据库
  *
@@ -14,8 +15,23 @@ export default class Database {
     private config: DatabaseConfiguration
 
     private dbEntities = [
-        entities.Administrator, entities.MailAddressVerificationCode,
-        entities.Session, entities.User
+        entities.User,
+        entities.Session,
+
+        entities.Administrator,
+        entities.Student,
+        entities.Teacher,
+
+        entities.MailAddressVerificationCode,
+
+        entities.CollectionGroup,
+        entities.CollectionItem,
+        entities.College,
+        entities.Product,
+        entities.ProductComment,
+
+        entities.College,
+        entities.ClassAndGrade
     ]
 
     private offlineDevConfig: typeorm.ConnectionOptions = {
@@ -54,6 +70,6 @@ export default class Database {
      * 停止数据库接口服务。
      */
     public async stop(): Promise<void> {
-        // 未实现
+        await typeorm.getConnection().close();
     }
 }

@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as typeorm from "typeorm";
+import * as entities from "./entity";
 import Configuration, { DatabaseConfiguration } from "./Configuration";
 import logger from "./Logger";
 
@@ -12,13 +13,15 @@ import logger from "./Logger";
 export default class Database {
     private config: DatabaseConfiguration
 
-    private offlineDevConfig: typeorm.ConnectionOptions = {
-        name:     "main",
-        type:     "sqlite",
-        database: path.resolve(__dirname, "../var/main.sqlite3"),
-        entities: [
+    private dbEntities = [
+        entities.Administrator
+    ]
 
-        ],
+    private offlineDevConfig: typeorm.ConnectionOptions = {
+        name:        "main",
+        type:        "sqlite",
+        database:    path.resolve(__dirname, "../var/main.sqlite3"),
+        entities:    this.dbEntities,
         logging:     true,
         synchronize: true
     }
@@ -50,6 +53,6 @@ export default class Database {
      * 停止数据库接口服务。
      */
     public async stop(): Promise<void> {
-
+        // 未实现
     }
 }

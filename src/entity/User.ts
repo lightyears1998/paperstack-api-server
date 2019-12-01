@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column  } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Generated } from "typeorm";
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
 import Authkey from "./Authkey";
@@ -7,42 +7,40 @@ import Authkey from "./Authkey";
 /**
  * 用户
  */
-@Entity()
-export class User {
+export abstract class User {
     @PrimaryGeneratedColumn("increment")
     id: number;
+
+    @Generated("uuid")
+    uuid: string;
+
+    @Column()
     email: string;
+
+    @Column()
     passwordHash: string;
 
+    @CreateDateColumn()
     createdAt: Date;
+
+    @UpdateDateColumn()
     updatedAt: Date;
-
-    createAuthkey: HasManyCreateAssociationMixin<Authkey>;
 }
-
-User.init({
-    email: {
-        type:      Sequelize.STRING,
-        allowNull: false,
-        comment:   "邮箱地址，大小写不敏感" },
-    passwordHash: {
-        type:      Sequelize.STRING,
-        allowNull: false,
-        comment:   "密码哈希，大小写不敏感" }
-}, { sequelize });
 
 
 /**
  * 检查邮箱地址是否已被注册
  * @param email 待检查的邮箱
  */
-export async function checkEmailAvailabilty(email: string): Promise<boolean> {
-    if (email === "") {
-        return false;
-    }
-    const emailCount: number = await User.count({ where: { email: { [Sequelize.Op.iLike]: email } } });
-    return emailCount === 0;
-}
+/*
+ * export async function checkEmailAvailabilty(email: string): Promise<boolean> {
+ *     if (email === "") {
+ *         return false;
+ *     }
+ *     const emailCount: number = await User.count({ where: { email: { [Sequelize.Op.iLike]: email } } });
+ *     return emailCount === 0;
+ * }
+ */
 
 
 /**

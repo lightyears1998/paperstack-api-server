@@ -1,8 +1,8 @@
 # 开发者参考资料
 
-## `Sequelize`
+## `typeorm`
 
-- [TypeScript](https://sequelize.org/master/manual/typescript.html)
+- [TypeORM](https://typeorm.io)
 
 ## 软件包依赖
 

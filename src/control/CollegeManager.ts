@@ -10,7 +10,8 @@ export class CollegeManager {
      * @param name 学院名称
      */
     static createCollege(name: string) {
-        const college = new College(name);
+        const db = getManager();
+        
     }
 
     static getCollege(): College {

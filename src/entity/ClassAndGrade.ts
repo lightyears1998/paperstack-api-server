@@ -25,7 +25,7 @@ export class ClassAndGrade {
     /**
      * 移除班级时，将所有引用此班级的学生的班级设置为空。
      */
-    public setReferenceToNull() {
-        throw "待实现！";
+    public async setReferenceInStudentToNull(): Promise<void> {
+        // 待实现
     }
 }

@@ -18,7 +18,6 @@ export class College {
      */
     public constructor(name: string) {
         this.name = name;
-        this.classes = [];
     }
 
     /**
@@ -27,13 +26,20 @@ export class College {
      */
     public createClass() {
         const classAndGrade = new ClassAndGrade(this, name);
+        this.classes.push(classAndGrade);
     }
 
     /**
      * 删除下辖班级中指定名称的班级。
      * @param name 待删除的班级名称
      */
-    public removeClass(name: string): void {
+    public async removeClass(name: string): Promise<void> {
+        this.classes.forEach(async (cls) => {
+            if (cls.name === name) {
+                await cls.setReferenceInStudentToNull();
+            }
+        });
 
+        this.classes = this.classes.filter((cls) => cls.name !== name);
     }
 }

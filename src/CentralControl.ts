@@ -75,8 +75,8 @@ export class CentralControl {
      */
     public async stop(): Promise<void> {
         if (CentralControl.isActive) {
-            this.database.stop();
-            this.rootRouter.stop();
+            await this.database.stop();
+            await this.rootRouter.stop();
         }
         CentralControl.isActive = false;
     }

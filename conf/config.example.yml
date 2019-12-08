@@ -1,5 +1,6 @@
 server:
   port: 8086
+  enableRegister: true
 database:
   host: 'api.server.net'
   user: 'paperstack'

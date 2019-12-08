@@ -13,9 +13,15 @@ export class Session {
     @PrimaryColumn()
     token: string
 
+    /**
+     * 会话凭证上次使用时间
+     */
     @UpdateDateColumn()
     lastUsed: Date
 
+    /**
+     * 会话凭证对应的用户
+     */
     @ManyToOne(type => User, user => user.sessions)
     user: User
 

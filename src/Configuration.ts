@@ -7,6 +7,7 @@ import logger from "./Logger";
 
 export interface ServerConfiguration {
     port: number;
+    enableRegister: boolean;
 }
 
 

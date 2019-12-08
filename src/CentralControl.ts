@@ -22,7 +22,7 @@ export class CentralControl {
      *
      * 版本号是形如“major.minor.patch”的字符串。
      */
-    public get version() {
+    public get version(): string {
         const packageJSONPath = path.resolve(`${__dirname}/../package.json`);
         const packageJSON = JSON.parse(fs.readFileSync(packageJSONPath, "utf8"));
         return packageJSON.version;
@@ -31,21 +31,21 @@ export class CentralControl {
     /**
      * 获取服务器的URI。
      */
-    public get URI() {
+    public get URI(): string {
         return `http://localhost:${this.config.server.port}`;
     }
 
     /**
      * 从文件中加载配置。
      */
-    private loadConfigurationFromFile() {
+    private loadConfigurationFromFile(): void {
         this.config = Configuration.load();
     }
 
     /**
      * 挂载路由。
      */
-    private mountRouters() {
+    private mountRouters(): void {
         // 挂载根路由。
         this.rootRouter = new RootRouter(this.config.server);
 
@@ -59,6 +59,8 @@ export class CentralControl {
      */
     public async start(): Promise<void> {
         if (!CentralControl.isActive) {
+            CentralControl.isActive = true;
+
             this.loadConfigurationFromFile();
 
             this.database = new Database(this.config.database);
@@ -67,7 +69,6 @@ export class CentralControl {
             this.mountRouters();
             this.rootRouter.start();
         }
-        CentralControl.isActive = true;
     }
 
     /**
@@ -75,10 +76,11 @@ export class CentralControl {
      */
     public async stop(): Promise<void> {
         if (CentralControl.isActive) {
+            CentralControl.isActive = false;
+
             await this.database.stop();
             await this.rootRouter.stop();
         }
-        CentralControl.isActive = false;
     }
 
     /**

@@ -16,20 +16,20 @@ describe("entity/College", async () => {
     const testCollegeName = "测试学院";
     const testClassName = ["测试171", "测试172"];
 
-    it("should create college", async() => {
+    it("should create college", async () => {
         const db = getManager();
-        
+
     });
 
-    it("should create classes", async() => {
+    it("should create classes", async () => {
         const db = getManager();
     });
 
-    it("should remove classes", async() => {
+    it("should remove classes", async () => {
         const db = getManager();
-    })
+    });
 
-    it("should remove college", async() => {
+    it("should remove college", async () => {
         const db = getManager();
     });
 

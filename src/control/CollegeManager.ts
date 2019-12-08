@@ -11,7 +11,7 @@ export class CollegeManager {
      */
     static createCollege(name: string) {
         const db = getManager();
-        
+
     }
 
     static getCollege(): College {

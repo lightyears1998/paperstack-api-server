@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryColumn, OneToMany, getManager } from "typeorm";
 import { ClassAndGrade } from "./";
 
 /**
@@ -24,9 +24,17 @@ export class College {
      * 创建指定名称的下辖班级数据结构。
      * @param name 带创建的班级的名称
      */
-    public createClass() {
+    public async createClass(name: string): Promise<void> {
+        const db = getManager();
+
         const classAndGrade = new ClassAndGrade(this, name);
+        if (!this.classes) {
+            this.classes = await db.find(ClassAndGrade, {college: this});
+        }
         this.classes.push(classAndGrade);
+
+        await db.save(this.classes);
+        await db.save(this);
     }
 
     /**
@@ -34,12 +42,16 @@ export class College {
      * @param name 待删除的班级名称
      */
     public async removeClass(name: string): Promise<void> {
+        const db = getManager();
+
         this.classes.forEach(async (cls) => {
             if (cls.name === name) {
                 await cls.setReferenceInStudentToNull();
+                await db.remove(cls);
             }
         });
 
         this.classes = this.classes.filter((cls) => cls.name !== name);
+        await db.save(this);
     }
 }

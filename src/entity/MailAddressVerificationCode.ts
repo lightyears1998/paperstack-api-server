@@ -25,7 +25,6 @@ export class MailAddressVerificationCode {
     /**
      * 验证码创建时间
      */
-    @CreateDateColumn()
     createAt: Date
 
     /**
@@ -33,7 +32,7 @@ export class MailAddressVerificationCode {
      *
      * 默认值为1000 * 60 * 60 * 24毫秒，即24小时。
      */
-    expirationInMiliseconds = 1000 * 60 * 60 * 24;
+    static expirationInMiliseconds = 1000 * 60 * 60 * 24;
 
     /**
      * 为指定邮箱地址生成一个验证码
@@ -48,6 +47,6 @@ export class MailAddressVerificationCode {
      * 返回验证码是否已经过期。
      */
     public isExpired(): boolean {
-        return (new Date().getTime() - this.createAt.getTime()) > this.expirationInMiliseconds;
+        return (new Date().getTime() - this.createAt.getTime()) > MailAddressVerificationCode.expirationInMiliseconds;
     }
 }

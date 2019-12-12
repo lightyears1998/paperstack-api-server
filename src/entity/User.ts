@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Generated, OneToMany, getManager, AdvancedConsoleLogger } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Generated, OneToMany, getManager, Unique } from "typeorm";
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
 import { Session } from "./";
@@ -18,6 +18,7 @@ export enum UserType {
  * 用户
  */
 @Entity()
+@Unique(["email"])
 export class User {
     @PrimaryGeneratedColumn("uuid")
     id: number;
@@ -128,7 +129,16 @@ export class User {
      */
     async terminateSession(token: string): Promise<void> {
         const db = getManager();
-        const session = db.findOne(Session, { token: token });
+        const session = await db.findOne(Session, { token: token });
         await db.remove(session);
+    }
+
+    /**
+     * 结束当前用户的所有会话。
+     */
+    async terminateAllSessions(): Promise<void> {
+        const db = getManager();
+        const sessions = await db.find(Session, { user: this });
+        await db.remove(sessions);
     }
 }

@@ -1,9 +1,9 @@
 import { describe, it, before, after } from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
-import { getManager } from "typeorm";
+import { getManager, Db } from "typeorm";
 import app from "./../CentralControl";
-import { User, UserType } from "./";
+import { User, UserType, Session } from "./";
 
 chai.use(chaiHttp);
 
@@ -50,13 +50,30 @@ describe("entity/User", async () => {
         }
     });
 
-    /**
-     * @todo 添加Session相关测试。
-     */
+    it("beginSession() and terminateSession() should work", async () => {
+        const db = getManager();
+        const user = await db.findOne(User, { email: testEmail});
 
-    it("should delete user", async () => {
+        const token = await user.beginSession();
+        let authUser = await Session.getUserByToken(token);
+        if (!authUser || user.email !== authUser.email) {
+            throw "Couldn't beginSession().";
+        }
+
+        await user.terminateSession(token);
+        authUser = await Session.getUserByToken(token);
+        if (authUser) {
+            throw "Couldn't terminateSession()."
+        }
+    })
+
+    it("should terminateAllSessions() and delete user", async () => {
         const db = getManager();
         const user = await db.findOneOrFail(User, { email: testEmail });
+        await user.beginSession();
+        await user.beginSession();
+
+        await user.terminateAllSessions();
         await db.remove(user);
 
         const users = await db.find(User, { email: testEmail });

@@ -35,8 +35,8 @@ describe("entity/MailAddressVerificationCode", async () => {
         const db = getManager();
         const code = await db.findOneOrFail(MailAddressVerificationCode, { email: testEmail });
 
-        // 将验证码创建的时间提早一个有效期，让验证码过期。
-        code.createAt = new Date(code.createAt.getTime() - code.expirationInMiliseconds);
+        // 将验证码创建的时间提早两个有效期，让验证码过期。
+        code.createAt = new Date(code.createAt.getTime() - 2*MailAddressVerificationCode.expirationInMiliseconds);
         if (!code.isExpired()) {
             throw "The verification code should be expired after an expiration.";
         }

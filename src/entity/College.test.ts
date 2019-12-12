@@ -1,10 +1,10 @@
-import { describe, it } from "mocha";
+import { describe, it, before, after } from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
 import { getManager } from "typeorm";
+import logger from "../Logger";
 import app from "./../CentralControl";
 import { College, ClassAndGrade } from "./";
-import logger from "../Logger";
 
 chai.use(chaiHttp);
 
@@ -20,17 +20,17 @@ describe("entity/College", async () => {
     it("should create college", async () => {
         const db = getManager();
         const college = new College(testCollegeName);
-        
+
         await db.save(college);
-        await db.findOneOrFail(College, {name: testCollegeName});
+        await db.findOneOrFail(College, { name: testCollegeName });
     });
 
     it("should create classes", async () => {
         const db = getManager();
-        const college = await db.findOne(College, {name: testCollegeName});
+        const college = await db.findOne(College, { name: testCollegeName });
 
         const classes = [
-            new ClassAndGrade(college, testClassName[0]), 
+            new ClassAndGrade(college, testClassName[0]),
             new ClassAndGrade(college, testClassName[1])
         ];
 
@@ -40,7 +40,7 @@ describe("entity/College", async () => {
 
     it("should load college and class properly", async ()=> {
         const db = getManager();
-        const college = await db.findOneOrFail(College, {name: testCollegeName}, {relations: ["classes"]});
+        const college = await db.findOneOrFail(College, { name: testCollegeName }, { relations: ["classes"] });
         const classes = college.classes;
         if (classes.length !== 2) {
             logger.error(classes);
@@ -50,26 +50,30 @@ describe("entity/College", async () => {
 
     it("should remove classes", async () => {
         const db = getManager();
-        const college = await db.findOneOrFail(College, {name: testCollegeName}, {relations: ["classes"]});
+        const college = await db.findOneOrFail(College, { name: testCollegeName }, { relations: ["classes"] });
         await db.remove(college.classes);
     });
 
-    it("should work with createClass() and removeClass()", async() => {
+    it("should work with createClass() and removeClass()", async () => {
         const db = getManager();
-        
-        let college = new College(testCollegeName);
+
+        const college = new College(testCollegeName);
         await db.save(college);
 
         await college.createClass(testClassName[0]);
         await college.createClass(testClassName[1]);
-        
-        let classess = await db.find(ClassAndGrade, {college: college});
+
+        let classess = await db.find(ClassAndGrade, { college: college });
         if (classess.length !== 2) {
-            throw "Fail to load classes!";
+            throw "createClass() failed!";
         }
 
-        await college.removeClass();
-        await college.removeClass();
+        await college.removeClass(testClassName[0]);
+        await college.removeClass(testClassName[1]);
+        classess = await db.find(ClassAndGrade, { college: college });
+        if (classess.length > 0) {
+            throw "removeClass() failed!";
+        }
     });
 
     it("should remove college", async () => {

@@ -1,0 +1,1 @@
+export { CollegeManager } from "./CollegeManager";

@@ -1,9 +1,10 @@
-import { describe, it } from "mocha";
+import { describe, it, before, after } from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
 import { getManager } from "typeorm";
-import app from "./../CentralControl";
 import { College } from "../entity";
+import app from "./../CentralControl";
+import { CollegeManager } from "./";
 
 chai.use(chaiHttp);
 
@@ -16,21 +17,21 @@ describe("control/CollegeManager", async () => {
     const testCollegeName = "测试学院";
     const testClassName = ["测试171", "测试172"];
 
-    it("should create college", async () => {
-        const db = getManager();
+    it("createCollege() should work", async () => {
+        await CollegeManager.createCollege(testCollegeName);
 
+        const db = getManager();
+        db.findOneOrFail(College, { name: testCollegeName });
     });
 
-    it("should create classes", async () => {
-        const db = getManager();
+    it("getCollege() should work", async () => {
+        const college = await CollegeManager.getCollege(testCollegeName);
+        await college.createClass(testClassName[0]);
+        await college.createClass(testClassName[1]);
     });
 
-    it("should remove classes", async () => {
-        const db = getManager();
-    });
-
-    it("should remove college", async () => {
-        const db = getManager();
+    it("removeCollege() should work", async () => {
+        await CollegeManager.removeCollege(testCollegeName);
     });
 
     after(async () => {

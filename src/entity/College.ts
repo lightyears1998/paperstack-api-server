@@ -29,7 +29,7 @@ export class College {
 
         const classAndGrade = new ClassAndGrade(this, name);
         if (!this.classes) {
-            this.classes = await db.find(ClassAndGrade, {college: this});
+            this.classes = await db.find(ClassAndGrade, { college: this });
         }
         this.classes.push(classAndGrade);
 
@@ -44,6 +44,11 @@ export class College {
     public async removeClass(name: string): Promise<void> {
         const db = getManager();
 
+        // 从数据库中查询下辖班级。
+        if (!this.classes) {
+            this.classes = await db.find(ClassAndGrade, { college: this});
+        }
+
         this.classes.forEach(async (cls) => {
             if (cls.name === name) {
                 await cls.setReferenceInStudentToNull();
@@ -52,6 +57,27 @@ export class College {
         });
 
         this.classes = this.classes.filter((cls) => cls.name !== name);
+        await db.save(this);
+    }
+
+    /**
+     * 删除所有下辖的班级。
+     * @param name
+     */
+    public async removeAllClasses(): Promise<void> {
+        const db = getManager();
+
+        // 从数据库中查询下辖班级。
+        if (!this.classes) {
+            this.classes = await db.find(ClassAndGrade, { college: this});
+        }
+
+        this.classes.forEach(async (cls) => {
+            await cls.setReferenceInStudentToNull();
+            await db.remove(cls);
+        });
+
+        this.classes = [];
         await db.save(this);
     }
 }

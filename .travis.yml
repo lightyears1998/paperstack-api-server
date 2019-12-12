@@ -11,7 +11,7 @@ jobs:
     script:
     - cp conf/config.travis.yml conf/config.yml
     - yarn build
-    - yarn test:all
+    - yarn test
   allow_failures:
   - name: lint
 notifications:

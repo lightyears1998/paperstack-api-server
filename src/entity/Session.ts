@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryColumn, ManyToOne, UpdateDateColumn, getManager } from "typeorm";
 import * as randomstring from "randomstring";
 import { User } from "./";
 
@@ -30,16 +30,31 @@ export class Session {
      *
      * 默认值为1000 * 60 * 60 * 24 * 7毫秒，即7天。
      */
-    expirationInMiliseconds = 1000 * 60 * 60 * 24 * 7;
+    public static expirationInMiliseconds = 1000 * 60 * 60 * 24 * 7;
 
     public constructor() {
         this.token = randomstring.generate(32);
+        this.lastUsed = new Date();
+    }
+
+    /**
+     * 获取会话凭证对应的用户。
+     * @param token 会话凭证
+     */
+    static async getUserByToken(token: string): Promise<User | null> {
+        const db = getManager();
+        try {
+            const session = await db.findOneOrFail(Session, { token: token }, { relations: ["user"]});
+            return session.user;
+        } catch {
+            return null;
+        }
     }
 
     /**
      * 检查用户会话是否在有效期内。
      */
     isValid(): boolean {
-        return new Date().getTime() - this.lastUsed.getTime() < this.expirationInMiliseconds;
+        return new Date().getTime() - this.lastUsed.getTime() < Session.expirationInMiliseconds;
     }
 }

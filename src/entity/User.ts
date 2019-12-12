@@ -105,8 +105,30 @@ export class User {
         return result;
     }
 
-    // 新建用户会话。
-    beginSession() {
+    /**
+     * 开始一个用户会话，并返回该会话的凭证。
+     */
+    async beginSession(): Promise<string> {
+        const db = getManager();
 
+        const session = new Session();
+        if (!this.sessions) {
+            this.sessions = await db.find(Session, { user: this });
+        }
+        this.sessions.push(session);
+
+        await db.save(session);
+        await db.save(this);
+
+        return session.token;
+    }
+
+    /**
+     * 结束用户会话。
+     */
+    async terminateSession(token: string): Promise<void> {
+        const db = getManager();
+        const session = db.findOne(Session, { token: token });
+        await db.remove(session);
     }
 }

@@ -1,4 +1,4 @@
-import { describe, it } from "mocha";
+import { describe, it, before, after } from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
 import { getManager } from "typeorm";
@@ -16,6 +16,9 @@ describe("entity/ClassAndGrade", async () => {
     /**
      * @todo 补充setReferenceInStudentToNull方法的测试。
      */
+    it('current do nothing', async() => {
+        console.log("Do nothing.")
+    });
 
     after(async () => {
         await app.stop();

@@ -1,9 +1,7 @@
 import * as path from "path";
 import * as typeorm from "typeorm";
 import * as entities from "./entity";
-import Configuration, { DatabaseConfiguration } from "./Configuration";
-import logger from "./Logger";
-
+import { DatabaseConfiguration } from "./Configuration";
 
 
 /**
@@ -40,6 +38,7 @@ export default class Database {
         database:    path.resolve(__dirname, "../var/main.sqlite3"),
         entities:    this.dbEntities,
         logging:     true,
+        logger:      "file",
         synchronize: true
     }
 

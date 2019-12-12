@@ -46,7 +46,7 @@ export class College {
 
         // 从数据库中查询下辖班级。
         if (!this.classes) {
-            this.classes = await db.find(ClassAndGrade, { college: this});
+            this.classes = await db.find(ClassAndGrade, { college: this });
         }
 
         this.classes.forEach(async (cls) => {
@@ -69,7 +69,7 @@ export class College {
 
         // 从数据库中查询下辖班级。
         if (!this.classes) {
-            this.classes = await db.find(ClassAndGrade, { college: this});
+            this.classes = await db.find(ClassAndGrade, { college: this });
         }
 
         this.classes.forEach(async (cls) => {

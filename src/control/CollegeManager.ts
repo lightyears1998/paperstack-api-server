@@ -10,7 +10,7 @@ export class CollegeManager {
      * 创建指定名称的学院，若学院已经存在则什么都不干。
      * @param name 学院名称
      */
-    static async createCollege(name: string) {
+    static async createCollege(name: string): Promise<void> {
         const db = getManager();
         const college = new College(name);
         await db.save(college);
@@ -33,7 +33,7 @@ export class CollegeManager {
      * 删除学院及其下辖班级。
      * @param name
      */
-    static async removeCollege(name: string) {
+    static async removeCollege(name: string): Promise<void> {
         const db = getManager();
         const college = await db.findOne(College, { name: name });
         if (college) {

@@ -8,7 +8,6 @@ plugins:
   - '@typescript-eslint'
   - import
 extends:
-  - eslint:recommended
   - plugin:@typescript-eslint/recommended
   - plugin:import/errors
   - plugin:import/warnings
@@ -51,8 +50,6 @@ rules:
     - {
       ignoreEOLComments: true
     }
-  no-unused-vars:
-    - warn
   no-return-await:
     - error
   wrap-iife:

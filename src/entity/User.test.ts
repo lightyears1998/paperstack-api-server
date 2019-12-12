@@ -28,7 +28,7 @@ describe("entity/User", async () => {
         const db = getManager();
         const user = await db.findOneOrFail(User, { email: testEmail });
 
-        if (user.email != testEmail) {
+        if (user.email !== testEmail) {
             throw "Fail to save/load email.";
         }
         if (! await user.verifyPassword(testPassword)) {

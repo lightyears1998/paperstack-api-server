@@ -1,6 +1,7 @@
 # Compiled files and runtime files
 lib
 var
+ormlogs.log
 
 # Configuration
 conf/*.yml

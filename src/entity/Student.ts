@@ -1,5 +1,5 @@
 import { PrimaryGeneratedColumn, OneToOne, JoinColumn, Column } from "typeorm";
-import { User } from "./";
+import { User, UserType } from "./";
 
 /**
  * 学生
@@ -23,4 +23,12 @@ export class Student {
     @OneToOne(type => User)
     @JoinColumn()
     user: User;
+
+    /**
+     * 创建新用户实体
+     * @param email 注册邮箱
+     */
+    public constructor(email: string) {
+        this.user = new User(email, UserType.Student);
+    }
 }

@@ -25,7 +25,7 @@ export class Student {
     user: User;
 
     /**
-     * 创建新用户实体
+     * 创建学生用户数据实例
      * @param email 注册邮箱
      */
     public constructor(email: string) {

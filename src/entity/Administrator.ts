@@ -1,5 +1,5 @@
 import { Entity, OneToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./";
+import { User, UserType } from "./";
 
 /**
  * 管理员
@@ -12,4 +12,11 @@ export class Administrator {
     @OneToOne(type => User)
     @JoinColumn()
     user: User;
+
+    /**
+     * 创建管理员数据结构实例
+     */
+    constructor(email: string) {
+        this.user = new User(email, UserType.Administrator);
+    }
 }

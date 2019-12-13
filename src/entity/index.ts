@@ -5,6 +5,7 @@ export { Administrator } from "./Administrator";
 export { Student } from "./Student";
 export { Teacher } from "./Teacher";
 
+export { Mail } from "./Mail";
 export { MailAddressVerificationCode } from "./MailAddressVerificationCode";
 
 export { CollectionGroup } from "./CollectionGroup";

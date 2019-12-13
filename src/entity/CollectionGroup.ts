@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { CollectionItem } from "./";
+import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import { CollectionItem, User } from "./";
 
 /**
  * 作业收集组
@@ -8,6 +8,13 @@ import { CollectionItem } from "./";
 export class CollectionGroup {
     @PrimaryGeneratedColumn("uuid")
     id: string;
+
+    @ManyToOne(() => User)
+    organizer?: User;
+
+    @ManyToMany(() => User)
+    @JoinTable()
+    attendants: User[];
 
     @OneToMany(() => CollectionItem, item => item.group)
     items: CollectionItem[];

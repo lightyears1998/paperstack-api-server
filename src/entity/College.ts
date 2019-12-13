@@ -9,7 +9,7 @@ export class College {
     @PrimaryColumn()
     name: string;
 
-    @OneToMany(type => ClassAndGrade, classes => classes.college)
+    @OneToMany(() => ClassAndGrade, classes => classes.college)
     classes: ClassAndGrade[]
 
     /**

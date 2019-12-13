@@ -9,7 +9,7 @@ import { CollegeManager } from "./";
 chai.use(chaiHttp);
 
 
-describe("control/CollegeManager", async () => {
+describe("control/CollegeManager", () => {
     before(async () => {
         await app.start();
     });

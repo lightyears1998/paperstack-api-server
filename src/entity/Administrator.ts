@@ -9,7 +9,7 @@ export class Administrator {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @OneToOne(type => User)
+    @OneToOne(() => User)
     @JoinColumn()
     user: User;
 

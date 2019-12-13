@@ -34,7 +34,7 @@ describe("entity/Student", () => {
         const user = await db.findOne(User, { email: testEmail });
         const student = await db.findOneOrFail(Student, { user: user });
 
-        if (student.phoneNumber != testPhoneNumber || student.number != testNumber) {
+        if (student.phoneNumber !== testPhoneNumber || student.number !== testNumber) {
             throw "Student has been improperly saved or loaded.";
         }
     });

@@ -8,7 +8,7 @@ import { Session } from "./";
 chai.use(chaiHttp);
 
 
-describe("entity/Session", async () => {
+describe("entity/Session", () => {
     before(async () => {
         await app.start();
     });
@@ -30,7 +30,7 @@ describe("entity/Session", async () => {
 
     it("could be loaded from database", async () => {
         const db = getManager();
-        const session = await db.findOneOrFail(Session, { token: token });
+        await db.findOneOrFail(Session, { token: token });
     });
 
     it("isValid() should work properly", async () => {

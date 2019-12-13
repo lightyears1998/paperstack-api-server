@@ -4,7 +4,7 @@ import chaiHttp from "chai-http";
 import { getManager } from "typeorm";
 import app from "./../CentralControl";
 import { Teacher } from "./Teacher";
-import { User, UserType, Session } from "./";
+import { User } from "./";
 
 chai.use(chaiHttp);
 
@@ -33,7 +33,7 @@ describe("entity/Teacher", () => {
         const user = await db.findOne(User, { email: testEmail });
         const teacher = await db.findOneOrFail(Teacher, { user: user });
 
-        if (teacher.number != teacherNumber) {
+        if (teacher.number !== teacherNumber) {
             throw "Teacher entity is saved or loaded inproperly.";
         }
     });

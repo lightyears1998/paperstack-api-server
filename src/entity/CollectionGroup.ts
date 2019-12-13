@@ -9,6 +9,6 @@ export class CollectionGroup {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @OneToMany(type => CollectionItem, item => item.group)
+    @OneToMany(() => CollectionItem, item => item.group)
     items: CollectionItem[];
 }

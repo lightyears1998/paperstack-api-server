@@ -17,7 +17,7 @@ globals:
   SharedArrayBuffer: readonly
 rules:
   require-await:
-    - warn
+    - error
   brace-style:
     - warn
     - 1tbs

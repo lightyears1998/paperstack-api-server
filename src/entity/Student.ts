@@ -21,7 +21,7 @@ export class Student {
     @Column()
     phoneNumber?: string;
 
-    @OneToOne(type => User)
+    @OneToOne(() => User)
     @JoinColumn()
     user: User;
 

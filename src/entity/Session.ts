@@ -22,7 +22,7 @@ export class Session {
     /**
      * 会话凭证对应的用户
      */
-    @ManyToOne(type => User, user => user.sessions)
+    @ManyToOne(() => User, user => user.sessions)
     user: User
 
     /**

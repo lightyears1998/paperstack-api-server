@@ -8,7 +8,7 @@ import { User, Administrator } from "./";
 chai.use(chaiHttp);
 
 
-describe("entity/Administrator", async () => {
+describe("entity/Administrator", () => {
     before(async () => {
         await app.start();
     });

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Generated, OneToMany, getManager, Unique } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, getManager, Unique } from "typeorm";
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
 import { Session } from "./";
@@ -56,7 +56,7 @@ export class User {
     /**
      * 当前进行中的用户会话
      */
-    @OneToMany(type => Session, session => session.user)
+    @OneToMany(() => Session, session => session.user)
     sessions: Session[];
 
     /**

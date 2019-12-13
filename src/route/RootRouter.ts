@@ -34,7 +34,8 @@ export default class RootRouter {
      */
     public mount<T extends Router>(path: string, routerType: new(path: string, req: express.Request) => T): void {
         this.expressRouter.all(path, async (req, res)=> {
-            const response = new routerType(path, req).handleRequest();
+            const handler = new routerType(path, req);
+            const response = await handler.handleRequest();
             res.json(response);
         });
     }

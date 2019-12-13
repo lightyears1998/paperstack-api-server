@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { CollectionGroup } from "./";
 
 /**
@@ -9,6 +9,6 @@ export class CollectionItem {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @ManyToOne(type => CollectionGroup, group => group.items)
+    @ManyToOne(() => CollectionGroup, group => group.items)
     group: CollectionGroup
 }

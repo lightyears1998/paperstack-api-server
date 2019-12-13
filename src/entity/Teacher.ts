@@ -15,7 +15,7 @@ export class Teacher {
     @Column()
     number: string;
 
-    @OneToOne(type => User)
+    @OneToOne(() => User)
     @JoinColumn()
     user: User;
 

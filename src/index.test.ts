@@ -5,7 +5,7 @@ import app from "./CentralControl";
 
 chai.use(chaiHttp);
 
-describe("App, CentralControl and WelcomRouter", async () => {
+describe("App, CentralControl and WelcomRouter", () => {
     it("should start", async () => {
         await app.start();
     });

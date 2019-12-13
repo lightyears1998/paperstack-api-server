@@ -1,14 +1,14 @@
 import { describe, it, before, after } from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
-import { getManager, Db } from "typeorm";
+import { getManager } from "typeorm";
 import app from "./../CentralControl";
 import { User, UserType, Session } from "./";
 
 chai.use(chaiHttp);
 
 
-describe("entity/User", async () => {
+describe("entity/User", () => {
     before(async () => {
         await app.start();
     });

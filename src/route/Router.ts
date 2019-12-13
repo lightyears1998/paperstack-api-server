@@ -21,10 +21,11 @@ export default abstract class Router {
     /**
      * 处理请求
      */
-    public handleRequest(): Record<string, string | boolean | number> {
+    public async handleRequest(): Promise<Record<string, string | boolean | number>> {
         this.generateRequestId();
         this.verifyRequestArgument();
-        this.getCurrentSessionUesr();
+        await this.getCurrentSessionUesr();
+
         logger.info(`[${this.path}] (${this.requestId})`);
         return this.process();
     }
@@ -32,22 +33,22 @@ export default abstract class Router {
     /**
      * 生成请求Id
      */
-    protected generateRequestId() {
+    protected generateRequestId(): void {
         this.requestId = randomString({ readable: true, length: 5 });
     }
 
     /**
      * 验证请求参数
      */
-    protected verifyRequestArgument() {
-
+    protected verifyRequestArgument(): void {
+        // this.args = ...
     }
 
     /**
      * 获取会话用户
      */
-    protected getCurrentSessionUesr() {
-
+    protected async getCurrentSessionUesr(): Promise<void> {
+        // this.user = ...
     }
 
     /**

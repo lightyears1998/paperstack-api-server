@@ -1,4 +1,4 @@
-import { describe, it, Test } from "mocha";
+import { describe, it, after, before } from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
 import { getManager } from "typeorm";
@@ -8,7 +8,7 @@ import { MailAddressVerificationCode } from "./";
 chai.use(chaiHttp);
 
 
-describe("entity/MailAddressVerificationCode", async () => {
+describe("entity/MailAddressVerificationCode", () => {
     before(async () => {
         await app.start();
     });

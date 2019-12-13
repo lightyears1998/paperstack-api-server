@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
-import { CollectionItem, ProductComment } from "./";
+import { User, CollectionItem, ProductComment } from "./";
+
 
 /**
  * 作业
@@ -10,20 +11,42 @@ export class Product {
     id: string
 
     /**
+     * 作业提交方
+     */
+    @ManyToOne(() => User)
+    committer: User
+
+    /**
      * 所属的作业收集项
      */
     @ManyToOne(() => CollectionItem)
     item: CollectionItem
 
+    /**
+     * 作业是否公开
+     */
     @Column()
-    isPublic?: boolean
+    isPublic?: boolean = false
 
-    @Column()
-    fileHash?: string
+    /**
+     * 作业文件哈希
+     */
+    @Column({
+        nullable: true
+    })
+    fileHash?: string = ""
 
-    @Column()
+    /**
+     * 作业评分
+     */
+    @Column({
+        nullable: true
+    })
     rating?: number
 
+    /**
+     * 作业评论
+     */
     @OneToMany(() => ProductComment, comment => comment.product)
     comments: ProductComment[];
 }

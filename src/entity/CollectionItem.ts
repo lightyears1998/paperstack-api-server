@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, Column } from "typeorm";
 import { CollectionGroup, Product } from "./";
 
 /**
@@ -14,6 +14,19 @@ export class CollectionItem {
      */
     @ManyToOne(() => CollectionGroup, group => group.items)
     group: CollectionGroup
+
+    /**
+     * 作业要求
+     */
+    @Column({
+        nullable: true
+    })
+    requirement: string;
+
+    @Column({
+        nullable: true
+    })
+    deadline: Date
 
     /**
      * 作业收集项下的作业

@@ -21,7 +21,7 @@ export enum UserType {
 @Unique(["email"])
 export class User {
     @PrimaryGeneratedColumn("uuid")
-    id: number;
+    id: string;
 
     /**
      * 注册邮箱

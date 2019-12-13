@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn } from "typeorm";
 import { User, Product } from "./";
 
 /**
@@ -9,15 +9,28 @@ export class ProductComment {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
+    /**
+     * 所评论的作业
+     */
     @ManyToOne(() => Product)
     product: Product
 
+    /**
+     * 评论作者
+     */
     @OneToOne(() => User)
+    @JoinColumn()
     author: User;
 
+    /**
+     * 评论时间
+     */
     @Column()
     commentedAt: Date
 
+    /**
+     * 评论内容
+     */
     @Column()
     content: string;
 

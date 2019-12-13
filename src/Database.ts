@@ -24,7 +24,6 @@ export default class Database {
 
         entities.CollectionGroup,
         entities.CollectionItem,
-        entities.College,
         entities.Product,
         entities.ProductComment,
 

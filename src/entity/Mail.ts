@@ -20,5 +20,6 @@ export class Mail {
     public constructor(receiverAddress: string, title: string, content: string) {
         this.receiverAddress = receiverAddress;
         this.title = title;
+        this.content = content;
     }
 }

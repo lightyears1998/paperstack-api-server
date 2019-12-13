@@ -1,4 +1,4 @@
-import { Entity, CreateDateColumn, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 import * as randomstring from "randomstring";
 
 
@@ -25,6 +25,7 @@ export class MailAddressVerificationCode {
     /**
      * 验证码创建时间
      */
+    @Column()
     createAt: Date
 
     /**

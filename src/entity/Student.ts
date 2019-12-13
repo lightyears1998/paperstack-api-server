@@ -1,9 +1,10 @@
-import { PrimaryGeneratedColumn, OneToOne, JoinColumn, Column } from "typeorm";
+import { PrimaryGeneratedColumn, OneToOne, JoinColumn, Column, Entity } from "typeorm";
 import { User, UserType } from "./";
 
 /**
  * 学生
  */
+@Entity()
 export class Student {
     @PrimaryGeneratedColumn("uuid")
     id: string;
@@ -18,7 +19,7 @@ export class Student {
      * 电话号码
      */
     @Column()
-    phoneNumber: string;
+    phoneNumber?: string;
 
     @OneToOne(type => User)
     @JoinColumn()

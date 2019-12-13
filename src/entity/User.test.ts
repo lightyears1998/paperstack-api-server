@@ -52,7 +52,7 @@ describe("entity/User", async () => {
 
     it("beginSession() and terminateSession() should work", async () => {
         const db = getManager();
-        const user = await db.findOne(User, { email: testEmail});
+        const user = await db.findOne(User, { email: testEmail });
 
         const token = await user.beginSession();
         let authUser = await Session.getUserByToken(token);
@@ -63,9 +63,9 @@ describe("entity/User", async () => {
         await user.terminateSession(token);
         authUser = await Session.getUserByToken(token);
         if (authUser) {
-            throw "Couldn't terminateSession()."
+            throw "Couldn't terminateSession().";
         }
-    })
+    });
 
     it("should terminateAllSessions() and delete user", async () => {
         const db = getManager();

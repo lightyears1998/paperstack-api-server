@@ -1,9 +1,9 @@
 import { describe, it, before, after } from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
+import { getManager } from "typeorm";
 import app from "./../CentralControl";
 import { User, Administrator } from "./";
-import { getManager } from "typeorm";
 
 chai.use(chaiHttp);
 
@@ -19,7 +19,7 @@ describe("entity/Administrator", async () => {
     it("should craete new Administrator", async () => {
         const admin = new Administrator(testEmail);
         await admin.user.modifyPassword(testPassword);
-        
+
         const db = getManager();
         await db.save(admin.user);
         await db.save(admin);
@@ -29,9 +29,9 @@ describe("entity/Administrator", async () => {
         const db = getManager();
         const user = await db.findOneOrFail(User, { email: testEmail });
         await db.findOneOrFail(Administrator, { user: user });
-    })
+    });
 
-    it("should delete administrator", async() => {
+    it("should delete administrator", async () => {
         const db = getManager();
         const user = await db.findOne(User, { email: testEmail });
         const admin = await db.findOne(Administrator, { user: user });

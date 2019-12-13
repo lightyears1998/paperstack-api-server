@@ -44,7 +44,7 @@ export class Session {
     static async getUserByToken(token: string): Promise<User | null> {
         const db = getManager();
         try {
-            const session = await db.findOneOrFail(Session, { token: token }, { relations: ["user"]});
+            const session = await db.findOneOrFail(Session, { token: token }, { relations: ["user"] });
             return session.user;
         } catch {
             return null;

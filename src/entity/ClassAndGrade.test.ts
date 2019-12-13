@@ -16,8 +16,8 @@ describe("entity/ClassAndGrade", async () => {
     /**
      * @todo 补充setReferenceInStudentToNull方法的测试。
      */
-    it('current do nothing', async() => {
-        console.log("Do nothing.")
+    it("current do nothing", async () => {
+        console.log("Do nothing.");
     });
 
     after(async () => {

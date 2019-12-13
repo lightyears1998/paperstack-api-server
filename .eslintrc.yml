@@ -16,6 +16,8 @@ globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
 rules:
+  require-await:
+    - warn
   brace-style:
     - warn
     - 1tbs

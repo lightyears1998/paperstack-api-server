@@ -9,7 +9,7 @@ import { College, ClassAndGrade } from "./";
 chai.use(chaiHttp);
 
 
-describe("entity/College", async () => {
+describe("entity/College", () => {
     before(async () => {
         await app.start();
     });

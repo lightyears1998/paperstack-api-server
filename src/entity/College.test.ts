@@ -27,7 +27,7 @@ describe("entity/College", () => {
 
     it("should create classes", async () => {
         const db = getManager();
-        const college = await db.findOne(College, { name: testCollegeName });
+        const college = await db.findOneOrFail(College, { name: testCollegeName });
 
         const classes = [
             new ClassAndGrade(college, testClassName[0]),

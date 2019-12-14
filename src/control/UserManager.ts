@@ -1,5 +1,5 @@
 import { getManager, EntityManager } from "typeorm";
-import { User, Student } from "../entity";
+import { User, Student, ClassAndGrade } from "../entity";
 
 
 /**
@@ -68,10 +68,34 @@ export class UserManager {
     }
 
     /**
+     * 通过用户结构体获取学生结构体信息。
+     * @param user 查找学生结构体所使用的用户结构体
+     */
+    public static async getStudentProfile(user: User): Promise<Student> {
+        try {
+            const student = await this.db.findOneOrFail(
+                Student,
+                { user: user },
+                { relations: ["classAndGrade", "user"] }
+            );
+            if (student.classAndGrade) { // 若学生有注册班级信息，则尝试根据班级信息找到所属学院。
+                student.classAndGrade = await this.db.findOne(
+                    ClassAndGrade,
+                    { name: student.classAndGrade.name },
+                    { relations: ["college"] }
+                );
+            }
+            return student;
+        } catch {
+            return null;
+        }
+    }
+
+    /**
      * 更新学生的个人信息。
      * @param student 用于更新信息的结构体。
      */
-    public static async updateStudentProfile(student: Student) {
-
+    public static async updateStudentProfile(student: Student): Promise<void> {
+        await this.db.save(student);
     }
 }

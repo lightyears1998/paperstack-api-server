@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, ManyToOne, getManager } from "typeorm";
+import { Student } from "./Student";
 import { College } from ".";
 
 /**
@@ -23,9 +24,15 @@ export class ClassAndGrade {
     }
 
     /**
-     * 移除班级时，将所有引用此班级的学生的班级设置为空。
+     * 移除班级时，将所有引用此班级的外键设置为空。
+     * 引用此班级的外键有：Student.class（学生的所属班级属性）。
      */
-    public async setReferenceInStudentToNull(): Promise<void> {
-        // 待实现
+    public async setReferencedKeyToNull(): Promise<void> {
+        const db = getManager();
+        const students = await db.find(Student, { classAndGrade: this });
+        students.forEach((student) => {
+            student.classAndGrade = null;
+        });
+        await db.save(students);
     }
 }

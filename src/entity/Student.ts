@@ -1,4 +1,5 @@
-import { PrimaryGeneratedColumn, OneToOne, JoinColumn, Column, Entity } from "typeorm";
+import { PrimaryGeneratedColumn, OneToOne, JoinColumn, Column, Entity, ManyToOne } from "typeorm";
+import { ClassAndGrade } from "./ClassAndGrade";
 import { User, UserType } from "./";
 
 /**
@@ -18,6 +19,14 @@ export class Student {
     number: string;
 
     /**
+     * 姓名
+     */
+    @Column({
+        nullable: true
+    })
+    name: string;
+
+    /**
      * 性别
      */
     @Column({
@@ -33,6 +42,12 @@ export class Student {
     })
     phoneNumber?: string;
 
+    /**
+     * 所属班级
+     */
+    @ManyToOne(() => ClassAndGrade)
+    classAndGrade: ClassAndGrade;
+
     @OneToOne(() => User)
     @JoinColumn()
     user: User;
@@ -43,5 +58,16 @@ export class Student {
      */
     public constructor(email: string) {
         this.user = new User(email, UserType.Student);
+    }
+
+    /**
+     * 返回学号是否符合规范。
+     * 符合规范的学号是10位数字。
+     * @param number 学号
+     * @returns 若学号符合规范则返回true。
+     */
+    public static numberMatchesPattern(number: string): boolean {
+        const regex = /\d{10}/;
+        return regex.test(number);
     }
 }

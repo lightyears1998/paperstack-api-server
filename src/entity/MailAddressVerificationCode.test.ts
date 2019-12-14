@@ -43,6 +43,8 @@ describe("entity/MailAddressVerificationCode", () => {
     });
 
     after(async () => {
+        const db = getManager();
+        await db.remove(await db.find(MailAddressVerificationCode, { email: testEmail }));
         await app.stop();
     });
 });

@@ -67,6 +67,8 @@ export class CentralControl {
 
         // 挂载个人信息子系统的路由。
         this.rootRouter.mount("/user/modifyPassword", routers.ModifyPasswordRouter);
+        this.rootRouter.mount("/user/student/profile", routers.StudentProfileRouter);
+        this.rootRouter.mount("/user/student/updateProfile", routers.StudentProfileUpdateRouter);
     }
 
     /**

@@ -10,6 +10,7 @@ export enum RouterResponseCode {
     // 通用
     Success = 0,
     Failure = 1,
+    PartialSuccess = 3,
 
     // 注册子系统
     EmailNotRegistered = 11,
@@ -23,7 +24,8 @@ export enum RouterResponseCode {
     LoginEmailUnregistered = 22,
     LoginPasswordMismatch = 23,
 
-    // 个人信息子系统复用通用代码。
+    // 个人信息子系统
+    NotStudent = 30
 }
 
 

@@ -61,7 +61,7 @@ export abstract class Router {
 
     /**
      * 规范化邮箱地址，使用全小写邮箱地址。
-     * @param any 
+     * @param any
      */
     protected normalizeEmail(any: unknown): string {
         return this.normalizeString(any).toLowerCase();

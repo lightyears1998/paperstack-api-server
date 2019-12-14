@@ -13,7 +13,7 @@ describe("entity/Student", () => {
         await app.start();
     });
 
-    const testEmail = "student@test.com";
+    const testEmail = "student@unit.test.com";
     const testPassword = "student.password";
     const testNumber = "1706300000";
     const testPhoneNumber = "12345678910";
@@ -47,6 +47,16 @@ describe("entity/Student", () => {
         await user.terminateAllSessions();
         await db.remove(student);
         await db.remove(user);
+    });
+
+    it("Student.numberMatchesPattern()能检查出不符规范的学号。", () => {
+        chai.expect(Student.numberMatchesPattern("1706300000") === true);
+
+        chai.expect(Student.numberMatchesPattern("") === false);
+        chai.expect(Student.numberMatchesPattern("abcdefghij") === false);
+        chai.expect(Student.numberMatchesPattern("170630000") === false);
+        chai.expect(Student.numberMatchesPattern("17063000000") === false);
+        chai.expect(Student.numberMatchesPattern("a123456") === false);
     });
 
     after(async () => {

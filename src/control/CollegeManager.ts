@@ -1,5 +1,5 @@
 import { getManager } from "typeorm";
-import { College } from "../entity";
+import { College, ClassAndGrade } from "../entity";
 
 
 /**
@@ -20,10 +20,23 @@ export class CollegeManager {
      * 获取指定名称的学院，学院不存在时返回null。
      * @param name 学院名称
      */
-    static async getCollege(name: string): Promise<College> {
+    static async getCollege(name: string): Promise<College | null> {
         try {
             const db = getManager();
             return await db.findOneOrFail(College, { name: name });
+        } catch {
+            return null;
+        }
+    }
+
+    /**
+     * 获取指定名称的班级，班级不存在时返回null。
+     * @param name 班级名称
+     */
+    static async getClassAndGrade(name: string): Promise<ClassAndGrade | null> {
+        try {
+            const db = getManager();
+            return await db.findOneOrFail(ClassAndGrade, { name: name });
         } catch {
             return null;
         }

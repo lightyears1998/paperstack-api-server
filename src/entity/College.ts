@@ -51,7 +51,7 @@ export class College {
 
         this.classes.forEach(async (cls) => {
             if (cls.name === name) {
-                await cls.setReferenceInStudentToNull();
+                await cls.setReferencedKeyToNull();
                 await db.remove(cls);
             }
         });
@@ -73,7 +73,7 @@ export class College {
         }
 
         this.classes.forEach(async (cls) => {
-            await cls.setReferenceInStudentToNull();
+            await cls.setReferencedKeyToNull();
             await db.remove(cls);
         });
 

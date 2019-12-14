@@ -1,6 +1,6 @@
+import { UserManager } from "../control";
 import { RouterResponse, RouterResponseCode } from "./RouterResponse";
 import { Router } from "./";
-import { UserManager } from "../control";
 
 
 /**
@@ -8,7 +8,7 @@ import { UserManager } from "../control";
  */
 export class ModifyPasswordRouter extends Router {
     private password: string;
-    
+
     verifyRequestArgument(): void {
         super.verifyRequestArgument();
         this.password = this.normalizeString(this.req.body.password);

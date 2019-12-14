@@ -15,6 +15,8 @@ export { LogoutRouter } from "./LogoutRouter";
 
 // 个人信息子系统
 export { ModifyPasswordRouter } from "./ModifyPasswordRouter";
+export { StudentProfileRouter } from "./StudentProfileRouter";
+export { StudentProfileUpdateRouter } from "./StudentProfileUpdateRouter";
 
 // 作业收集子系统
 

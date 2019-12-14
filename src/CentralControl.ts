@@ -59,6 +59,11 @@ export class CentralControl {
         this.rootRouter.mount("/register/checkEmail", routers.CheckEmailRouter);
         this.rootRouter.mount("/register/getVerificationCode", routers.GetVerificationCodeRouter);
         this.rootRouter.mount("/register/register", routers.RegisterRouter);
+
+        // 挂载登录子系统的路由。
+        this.rootRouter.mount("/login/login", routers.LoginRouter);
+        this.rootRouter.mount("/login/status", routers.LoginStatusRouter);
+        this.rootRouter.mount("/login/logout", routers.LogoutRouter);
     }
 
     /**

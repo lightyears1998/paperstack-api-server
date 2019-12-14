@@ -9,6 +9,9 @@ export { RegisterRouter } from "./RegisterRouter";
 export { GetVerificationCodeRouter } from "./GetVerificationCodeRouter";
 
 // 登录子系统
+export { LoginRouter } from "./LoginRouter";
+export { LoginStatusRouter } from "./LoginStatusRouter";
+export { LogoutRouter } from "./LogoutRouter";
 
 // 个人信息子系统
 

@@ -13,7 +13,7 @@ export class GetVerificationCodeRouter extends Router {
 
     verifyRequestArgument(): void {
         super.verifyRequestArgument();
-        this.email = this.normalizeSting(this.req.body.email);
+        this.email = this.normalizeString(this.req.body.email);
     }
 
     async process(): Promise<RouterResponse> {

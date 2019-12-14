@@ -6,13 +6,21 @@
  * 登录子系统代码以2开头。
  */
 export enum RouterResponseCode {
+    // 通用
     Success = 0,
     Failure = 1,
+
+    // 注册子系统
     EmailNotRegistered = 11,
     EmailAlreadyRegisterd = 12,
-    RegisterPasswordEmpty = 14,
     RegisterEmailEmpty = 13,
-    LoginPasswordMismatch = 21
+    RegisterPasswordEmpty = 14,
+
+    // 登录子系统
+    LoginEmailEmpty = 20,
+    LoginPasswordEmpty = 21,
+    LoginEmailUnregistered = 22,
+    LoginPasswordMismatch = 23,
 }
 
 

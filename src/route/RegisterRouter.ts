@@ -15,9 +15,9 @@ export class RegisterRouter extends Router {
 
     verifyRequestArgument(): void {
         super.verifyRequestArgument();
-        this.email = this.normalizeSting(this.req.body.email);
-        this.password = this.normalizeSting(this.req.body.password);
-        this.verificationCode = this.normalizeSting(this.req.body.verificationCode);
+        this.email = this.normalizeString(this.req.body.email);
+        this.password = this.normalizeString(this.req.body.password);
+        this.verificationCode = this.normalizeString(this.req.body.verificationCode);
     }
 
     async process(): Promise<RouterResponse> {

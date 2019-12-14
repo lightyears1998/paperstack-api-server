@@ -2,6 +2,7 @@ import * as express from "express";
 import { generate as randomString } from "randomstring";
 import logger from "../Logger";
 import { User } from "../entity";
+import { UserSessionManager } from "../control/UserSessionManager";
 import { RouterResponse } from "./";
 
 
@@ -51,7 +52,7 @@ export abstract class Router {
      * 规范化string类型的参数，去除头尾的空格。
      * @param any 待规范化的路由参数
      */
-    protected normalizeSting(any: unknown): string {
+    protected normalizeString(any: unknown): string {
         if (typeof any === "undefined") {
             return "";
         }
@@ -64,14 +65,14 @@ export abstract class Router {
      * 在子类中重写时，要先调用super.verifyRequestArgument()。
      */
     protected verifyRequestArgument(): void {
-        this.userToken = this.normalizeSting(this.req.body.token);
+        this.userToken = this.normalizeString(this.req.body.token);
     }
 
     /**
-     * 获取会话用户
+     * 登录子系统：获取会话用户
      */
     protected async getCurrentSessionUesr(): Promise<void> {
-        // this.user = ...
+        this.user = await UserSessionManager.getUserBySessionToken(this.userToken);
     }
 
     /**

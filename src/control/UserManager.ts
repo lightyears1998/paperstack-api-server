@@ -1,5 +1,5 @@
 import { getManager, EntityManager } from "typeorm";
-import { Student } from "../entity";
+import { User, Student } from "../entity";
 
 
 /**
@@ -16,6 +16,19 @@ export class UserManager {
         this.db = null;
     }
 
+    /**
+     * 根据邮箱地址定位用户。
+     * @param email 用户邮箱
+     */
+    public static async findUserByEmail(email: string): Promise<User | null> {
+        email = email.toLowerCase();
+        try {
+            const user = await this.db.findOneOrFail(User, { email: email });
+            return user;
+        } catch {
+            return null;
+        }
+    }
 
     /**
      * 创建新的学生用户。
@@ -24,6 +37,7 @@ export class UserManager {
      * @returns 是否创建成功
      */
     public static async newStudent(email: string, password: string): Promise<boolean> {
+        email = email.toLowerCase();
         try {
             const student = new Student(email);
             await student.user.modifyPassword(password);

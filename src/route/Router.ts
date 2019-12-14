@@ -60,6 +60,14 @@ export abstract class Router {
     }
 
     /**
+     * 规范化邮箱地址，使用全小写邮箱地址。
+     * @param any 
+     */
+    protected normalizeEmail(any: unknown): string {
+        return this.normalizeString(any).toLowerCase();
+    }
+
+    /**
      * 验证请求参数
      *
      * 在子类中重写时，要先调用super.verifyRequestArgument()。

@@ -4,6 +4,7 @@
  * 通用代码占1位数字。
  * 注册子系统代码以1开头。
  * 登录子系统代码以2开头。
+ * 个人信息子系统代码以3开头。
  */
 export enum RouterResponseCode {
     // 通用
@@ -21,6 +22,8 @@ export enum RouterResponseCode {
     LoginPasswordEmpty = 21,
     LoginEmailUnregistered = 22,
     LoginPasswordMismatch = 23,
+
+    // 个人信息子系统复用通用代码。
 }
 
 

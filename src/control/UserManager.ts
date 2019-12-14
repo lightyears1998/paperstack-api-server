@@ -31,6 +31,23 @@ export class UserManager {
     }
 
     /**
+     * 修改用户密码，并注销用户所有会话，用户需要重新登录。
+     * @param user 待修改密码的用户
+     * @param password 新密码
+     */
+    public static async modifyUserPassword(user: User, password: string): Promise<boolean> {
+        try {
+            user = await this.db.findOneOrFail(User, { email: user.email });
+            await user.modifyPassword(password);
+            await this.db.save(user);
+            await user.terminateAllSessions();
+        } catch {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 创建新的学生用户。
      * @param email 注册邮箱
      * @param password 密码
@@ -48,5 +65,13 @@ export class UserManager {
         } catch {
             return false;
         }
+    }
+
+    /**
+     * 更新学生的个人信息。
+     * @param student 用于更新信息的结构体。
+     */
+    public static async updateStudentProfile(student: Student) {
+
     }
 }

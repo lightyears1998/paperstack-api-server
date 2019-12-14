@@ -64,6 +64,9 @@ export class CentralControl {
         this.rootRouter.mount("/login/login", routers.LoginRouter);
         this.rootRouter.mount("/login/status", routers.LoginStatusRouter);
         this.rootRouter.mount("/login/logout", routers.LogoutRouter);
+
+        // 挂载个人信息子系统的路由。
+        this.rootRouter.mount("/user/modifyPassword", routers.ModifyPasswordRouter);
     }
 
     /**

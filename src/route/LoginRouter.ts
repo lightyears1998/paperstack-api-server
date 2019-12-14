@@ -13,7 +13,7 @@ export class LoginRouter extends Router {
 
     verifyRequestArgument(): void {
         super.verifyRequestArgument();
-        this.email = this.normalizeString(this.req.body.email);
+        this.email = this.normalizeEmail(this.req.body.email);
         this.password = this.normalizeString(this.req.body.password);
     }
 

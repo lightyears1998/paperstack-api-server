@@ -18,6 +18,14 @@ export class Student {
     number: string;
 
     /**
+     * 性别
+     */
+    @Column({
+        nullable: true
+    })
+    sex: string;
+
+    /**
      * 电话号码
      */
     @Column({

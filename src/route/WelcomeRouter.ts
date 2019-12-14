@@ -3,11 +3,12 @@ import { Router, RouterResponse, RouterResponseCode } from "./";
 
 
 export class WelcomeRouter extends Router {
-    process(): RouterResponse {
-        return new RouterResponse(
+    async process(): Promise<RouterResponse> {
+        const welcome = await new RouterResponse(
             RouterResponseCode.Success,
             "欢迎使用PaperStack API Server。",
             { "version": app.version }
         );
+        return welcome;
     }
 }

@@ -5,6 +5,8 @@ import * as routers from "./route";
 import RootRouter from "./route/RootRouter";
 import Configuration from "./Configuration";
 import Database from "./Database";
+import { UserManager } from "./control";
+import { UserMailAddressVerificationService, MailService } from "./service";
 
 
 /**
@@ -49,13 +51,19 @@ export class CentralControl {
         // 挂载根路由。
         this.rootRouter = new RootRouter(this.config.server);
 
-        // 为端点挂载路由。
+        // 为端点挂载通用路由。
         this.rootRouter.mount("/", routers.WelcomeRouter);
         this.rootRouter.mount("/welcome", routers.WelcomeRouter);
+
+        // 挂载注册子系统的路由。
+        this.rootRouter.mount("/register/checkEmail", routers.CheckEmailRouter);
+        this.rootRouter.mount("/register/getVerificationCode", routers.GetVerificationCodeRouter);
+        this.rootRouter.mount("/register/register", routers.RegisterRouter);
     }
 
     /**
      * 启动服务。
+     * 按顺序启动数据库服务、一般服务、一般控制器，最后启动路由。
      */
     public async start(): Promise<void> {
         if (!CentralControl.isActive) {
@@ -63,9 +71,18 @@ export class CentralControl {
 
             this.loadConfigurationFromFile();
 
+            // 启动数据库。
             this.database = new Database(this.config.database);
             await this.database.start();
 
+            // 启动一般服务。
+            MailService.start();
+            UserMailAddressVerificationService.start();
+
+            // 启动控制器。
+            UserManager.start();
+
+            // 启动路由。
             this.mountRouters();
             this.rootRouter.start();
         }
@@ -73,13 +90,24 @@ export class CentralControl {
 
     /**
      * 停止服务。
+     * 停止服务的顺序与启动服务的顺序相反。
      */
     public async stop(): Promise<void> {
         if (CentralControl.isActive) {
             CentralControl.isActive = false;
 
+            // 停止路由。
+            this.rootRouter.stop();
+
+            // 停止控制器。
+            UserManager.stop();
+
+            // 停止一般服务。
+            UserMailAddressVerificationService.stop();
+            MailService.stop();
+
+            // 停止数据库。
             await this.database.stop();
-            await this.rootRouter.stop();
         }
     }
 

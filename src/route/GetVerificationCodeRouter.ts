@@ -1,13 +1,14 @@
 import validator from "validator";
-import { UserMailAddressVerificationService } from "../service";
+import { UserMailAddressVerificationService, MailService } from "../service";
+import { Mail } from "../entity";
 import { RouterResponse, RouterResponseCode } from "./RouterResponse";
 import { Router } from "./";
 
 
 /**
- * 注册子系统：检查邮箱地址可用性路由
+ * 注册子系统：获取邮箱地址验证码路由
  */
-export class CheckEmailRouter extends Router {
+export class GetVerificationCodeRouter extends Router {
     private email: string;
 
     verifyRequestArgument(): void {
@@ -41,9 +42,17 @@ export class CheckEmailRouter extends Router {
             );
         }
 
+        const verificationCode = await UserMailAddressVerificationService.generateEmailVerificationCode(this.email);
+        const mail = new Mail(
+            this.email,
+            "PaperStack作业收集平台邮箱验证码",
+            `欢迎您注册PaperStack作业收集平台，您的邮箱地址验证码是${verificationCode}。验证码24小时内有效。🙂`
+        );
+        MailService.sendMail(mail);
+
         return new RouterResponse(
             RouterResponseCode.Success,
-            "邮箱地址可用。",
+            "邮箱地址验证码已发送到指定邮箱。",
             { ok: true }
         );
     }

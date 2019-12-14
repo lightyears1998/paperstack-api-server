@@ -1,40 +1,65 @@
-// import { RequestHandler } from "express";
-// import { isEmail } from "validator";
-// import { User } from "../entity";
-// import { checkEmailAvailabilty, hashPassword } from "../entity/User";
-// import { ResponseCode } from "./ResponseCode";
-// import { ResponseJSON } from "./ResponseJSON";
+import validator from "validator";
+import { UserMailAddressVerificationService } from "../service";
+import { UserManager } from "../control";
+import { RouterResponse, RouterResponseCode } from "./RouterResponse";
+import { Router } from "./";
 
 
-// /**
-//  * 注册新用户
-//  */
-// const register: RequestHandler = async function (req, res) {
-//     const email = String(req.body.email);
-//     const password = String(req.body.password) ;
+/**
+ * 注册子系统：注册路由
+ */
+export class RegisterRouter extends Router {
+    private email: string;
+    private password: string;
+    private verificationCode: string;
 
-//     if (!isEmail(email)) {
-//         res.json(new ResponseJSON(ResponseCode.Failure, "注册失败，邮箱地址格式不正确。"));
-//         return;
-//     }
+    verifyRequestArgument(): void {
+        super.verifyRequestArgument();
+        this.email = this.normalizeSting(this.req.body.email);
+        this.password = this.normalizeSting(this.req.body.password);
+        this.verificationCode = this.normalizeSting(this.req.body.verificationCode);
+    }
 
-//     if (password === "") {
-//         res.json(new ResponseJSON(ResponseCode.PasswordEmpty, "注册失败，密码不能为空。"));
-//         return;
-//     }
+    async process(): Promise<RouterResponse> {
+        if (this.email === "") {
+            return new RouterResponse(
+                RouterResponseCode.RegisterEmailEmpty,
+                "邮箱为空。",
+                { ok: false }
+            );
+        }
 
-//     const emailOk = checkEmailAvailabilty(email);
-//     if (!emailOk) {
-//         res.json(new ResponseJSON(ResponseCode.EmailAlreadyRegisterd, "注册失败，邮箱地址已被注册。"));
-//         return;
-//     }
+        if (!validator.isEmail(this.email)) {
+            return new RouterResponse(
+                RouterResponseCode.Failure,
+                "邮箱不符合一般规则。",
+                { ok: false }
+            );
+        }
 
-//     await User.create({
-//         email:        email,
-//         passwordHash: await hashPassword(password)
-//     });
-//     res.json(new ResponseJSON(ResponseCode.Success, "注册成功。"));
-// };
+        const verificationCodeIsOk = await UserMailAddressVerificationService.verifyEmailVerificationCode(this.email, this.verificationCode);
+        if (!verificationCodeIsOk) {
+            return new RouterResponse(
+                RouterResponseCode.Failure,
+                "邮箱验证码错误或已经失效。",
+                { ok: false }
+            );
+        }
 
+        // 创建新的学生用户。
+        const newStudentUserIsCreated = await UserManager.newStudent(this.email, this.password);
+        if (!newStudentUserIsCreated) {
+            return new RouterResponse(
+                RouterResponseCode.Failure,
+                "服务器内部错误。",
+                { ok: false }
+            ); // 仅在罕见情况下出现此错误。
+        }
 
-// export default register;
+        return new RouterResponse(
+            RouterResponseCode.Success,
+            "注册成功",
+            { ok: true }
+        );
+    }
+}

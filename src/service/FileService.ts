@@ -2,7 +2,7 @@ import * as crypto from "crypto";
 import * as fs from "fs-extra";
 
 /**
- * 文件存储服务
+ * 作业收集子系统：文件存储服务
  * @todo 待实现
  *
  * 文件哈希使用SHA-1算法。

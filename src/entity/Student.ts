@@ -12,13 +12,17 @@ export class Student {
     /**
      * 学号
      */
-    @Column()
+    @Column({
+        nullable: true
+    })
     number: string;
 
     /**
      * 电话号码
      */
-    @Column()
+    @Column({
+        nullable: true
+    })
     phoneNumber?: string;
 
     @OneToOne(() => User)

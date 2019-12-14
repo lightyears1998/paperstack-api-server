@@ -1,6 +1,7 @@
 import * as express from "express";
 import { generate as randomString } from "randomstring";
 import logger from "../Logger";
+import { User } from "../entity";
 import { RouterResponse } from "./";
 
 
@@ -11,6 +12,16 @@ export abstract class Router {
     protected path: string
     protected req: express.Request;
     protected requestId: string;
+
+    /**
+     * 识别用户登录状态的凭证
+     */
+    protected userToken: string;
+
+    /**
+     * 执行当前访问路由操作的用户
+     */
+    protected user: User;
 
     constructor(path: string, req: express.Request) {
         this.path = path;
@@ -26,7 +37,7 @@ export abstract class Router {
         await this.getCurrentSessionUesr();
 
         logger.info(`[${this.path}] (${this.requestId})`);
-        return this.process().toJSON();
+        return (await this.process()).toJSON();
     }
 
     /**
@@ -37,10 +48,23 @@ export abstract class Router {
     }
 
     /**
+     * 规范化string类型的参数，去除头尾的空格。
+     * @param any 待规范化的路由参数
+     */
+    protected normalizeSting(any: unknown): string {
+        if (typeof any === "undefined") {
+            return "";
+        }
+        return String(any).trim();
+    }
+
+    /**
      * 验证请求参数
+     *
+     * 在子类中重写时，要先调用super.verifyRequestArgument()。
      */
     protected verifyRequestArgument(): void {
-        // 在子类中重写，用于确保路由接收的参数类型正确。
+        this.userToken = this.normalizeSting(this.req.body.token);
     }
 
     /**
@@ -53,5 +77,5 @@ export abstract class Router {
     /**
      * 执行控制逻辑
      */
-    protected abstract process(): RouterResponse
+    protected async abstract process(): Promise<RouterResponse>
 }

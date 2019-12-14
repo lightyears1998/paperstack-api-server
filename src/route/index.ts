@@ -1,4 +1,17 @@
 export { Router } from "./Router";
 export { RouterResponseCode, RouterResponse } from "./RouterResponse";
-export { CheckEmailRouter } from "./CheckEmailRouter";
+
 export { WelcomeRouter } from "./WelcomeRouter";
+
+// 注册子系统
+export { CheckEmailRouter } from "./CheckEmailRouter";
+export { RegisterRouter } from "./RegisterRouter";
+export { GetVerificationCodeRouter } from "./GetVerificationCodeRouter";
+
+// 登录子系统
+
+// 个人信息子系统
+
+// 作业收集子系统
+
+// 平台管理子系统

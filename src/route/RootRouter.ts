@@ -4,7 +4,7 @@ import cors from "cors";
 import { ServerConfiguration } from "../Configuration";
 import logger from "../Logger";
 import app from "../CentralControl";
-import Router from "./Router";
+import { Router } from "./Router";
 
 
 /**

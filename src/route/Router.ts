@@ -1,17 +1,16 @@
 import * as express from "express";
 import { generate as randomString } from "randomstring";
 import logger from "../Logger";
+import { RouterResponse } from "./";
 
 
 /**
  * 路由
- *
- * @todo 将Express.Router写入自定义Router的constructor
  */
-export default abstract class Router {
-    private path: string
-    private req: express.Request;
-    private requestId: string;
+export abstract class Router {
+    protected path: string
+    protected req: express.Request;
+    protected requestId: string;
 
     constructor(path: string, req: express.Request) {
         this.path = path;
@@ -21,13 +20,13 @@ export default abstract class Router {
     /**
      * 处理请求
      */
-    public async handleRequest(): Promise<Record<string, string | boolean | number>> {
+    public async handleRequest(): Promise<Record<string, unknown>> {
         this.generateRequestId();
         this.verifyRequestArgument();
         await this.getCurrentSessionUesr();
 
         logger.info(`[${this.path}] (${this.requestId})`);
-        return this.process();
+        return this.process().toJSON();
     }
 
     /**
@@ -41,7 +40,7 @@ export default abstract class Router {
      * 验证请求参数
      */
     protected verifyRequestArgument(): void {
-        // this.args = ...
+        // 在子类中重写，用于确保路由接收的参数类型正确。
     }
 
     /**
@@ -54,5 +53,5 @@ export default abstract class Router {
     /**
      * 执行控制逻辑
      */
-    protected abstract process(): Record<string, string | boolean | number>
+    protected abstract process(): RouterResponse
 }

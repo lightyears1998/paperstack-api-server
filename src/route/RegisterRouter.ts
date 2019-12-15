@@ -31,7 +31,7 @@ export class RegisterRouter extends Router {
 
         if (!validator.isEmail(this.email)) {
             return new RouterResponse(
-                RouterResponseCode.Failure,
+                RouterResponseCode.BadEmail,
                 "邮箱不符合一般规则。",
                 { ok: false }
             );
@@ -40,10 +40,18 @@ export class RegisterRouter extends Router {
         const verificationCodeIsOk = await UserMailAddressVerificationService.verifyEmailVerificationCode(this.email, this.verificationCode);
         if (!verificationCodeIsOk) {
             return new RouterResponse(
-                RouterResponseCode.Failure,
+                RouterResponseCode.BadVerificationCode,
                 "邮箱验证码错误或已经失效。",
                 { ok: false }
             );
+        }
+
+        if (UserManager.findUserByEmail(this.email)) {
+            return new RouterResponse(
+                RouterResponseCode.EmailAlreadyRegisterd,
+                "当前邮箱已被注册。",
+                { ok: false }
+            ); 
         }
 
         // 创建新的学生用户。
@@ -53,7 +61,7 @@ export class RegisterRouter extends Router {
                 RouterResponseCode.Failure,
                 "服务器内部错误。",
                 { ok: false }
-            ); // 仅在罕见情况下出现此错误。
+            ); // 仅在少见情况下出现此错误。
         }
 
         return new RouterResponse(

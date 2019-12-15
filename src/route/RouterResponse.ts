@@ -22,6 +22,7 @@ export enum RouterResponseCode {
     EmailAlreadyRegisterd = 12,
     RegisterEmailEmpty = 13,
     RegisterPasswordEmpty = 14,
+    BadVerificationCode = 15,
 
     // 登录子系统
     LoginEmailEmpty = 20,

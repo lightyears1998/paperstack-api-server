@@ -1,4 +1,3 @@
-import { UserType } from "../entity";
 import { CollectionGroupManager, UserManager } from "../control";
 import { RouterResponse, RouterResponseCode } from "./RouterResponse";
 import { Router } from ".";
@@ -42,6 +41,24 @@ export class AddProductRouter extends Router {
             return new RouterResponse(
                 RouterResponseCode.Failure,
                 "作业收集项不存在。"
+            );
+        }
+
+        // 检查当前用户是否在待提交作业的列表里面，
+        // 如果不在则禁止提交。
+        const thisGroup = await CollectionGroupManager.getCollectionGroupById(item.group.id);
+        const userAttendedGroup = (await UserManager.findUserByEmail(this.user.email)).attendedCollectionGroup;
+        let allowedToAddProduct = false;
+        userAttendedGroup.forEach(group => {
+            if (group.id === thisGroup.id) {
+                allowedToAddProduct = true;
+            }
+        })
+        
+        if (!allowedToAddProduct) {
+            return new RouterResponse(
+                RouterResponseCode.Failure,
+                "提交作业失败，当前用户不在提交作业的名单中。",
             );
         }
 

@@ -23,7 +23,7 @@ export class UserManager {
     public static async findUserByEmail(email: string): Promise<User | null> {
         email = email.toLowerCase();
         try {
-            const user = await this.db.findOneOrFail(User, { email: email });
+            const user = await this.db.findOneOrFail(User, { email: email }, { relations: ["organizedCollectionGroup", "attendedCollectionGroup"]});
             return user;
         } catch {
             return null;

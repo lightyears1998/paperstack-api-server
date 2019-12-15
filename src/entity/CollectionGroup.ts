@@ -14,13 +14,13 @@ export class CollectionGroup {
     /**
      * 作业收集发起方
      */
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, user => user.organizedCollectionGroup)
     organizer?: User;
 
     /**
      * 作业收集参与方
      */
-    @ManyToMany(() => User)
+    @ManyToMany(() => User, user => user.attendedCollectionGroup)
     @JoinTable()
     attendants: User[];
 

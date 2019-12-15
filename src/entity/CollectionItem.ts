@@ -44,6 +44,19 @@ export class CollectionItem {
     products: Product[];
 
     /**
+     * 判断当前作业收集项是否对特定用户可见。
+     * 作业收集项的可见性与作业收集组相同。
+     * @param user 待检查的用户
+     */
+    public async isVisibleTo(user: User): Promise<boolean> {
+        if (! this.group) {
+            const db = getManager();
+            this.group = (await db.findOne(CollectionItem, this.id, { relations: ["group"] })).group;
+        }
+        return this.group.isVisibleTo(user);
+    }
+
+    /**
      * 向作业收集项目添加一项作业。
      * @param commiter 作业提交方
      * @param isPublic 是否公开

@@ -58,6 +58,10 @@ export class CentralControl {
         this.rootRouter.mount("/universal/listTeacher", routers.ListTeacherRouter);
         this.rootRouter.mount("/universal/listCollege", routers.ListCollegeRouter);
         this.rootRouter.mount("/universal/listClassAndGrade", routers.ListClassAndGradeRouter);
+        this.rootRouter.mount("/universal/listCollectionGroup", routers.ListCollectionGroupRouter);
+        this.rootRouter.mount("/universal/listCollectionItem", routers.ListCollectionItemRouter);
+        this.rootRouter.mount("/universal/listProduct", routers.ListProductRouter);
+        this.rootRouter.mount("/universal/listProductComment", routers.ListProductCommentRouter);
 
         // 挂载注册子系统的路由。
         this.rootRouter.mount("/register/checkEmail", routers.CheckEmailRouter);

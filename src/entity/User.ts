@@ -154,4 +154,26 @@ export class User {
         const sessions = await db.find(Session, { user: this });
         await db.remove(sessions);
     }
+
+    /**
+     * 获取当前用户组织的作业收集组。
+     */
+    public async getOrganizedCollectionGroup(): Promise<CollectionGroup[]> {
+        if (! this.organizedCollectionGroup) {
+            const db = getManager();
+            this.organizedCollectionGroup = (await db.findOne(User, this.id, { relations: ["organizedCollectionGroup"] })).organizedCollectionGroup;
+        }
+        return this.organizedCollectionGroup;
+    }
+
+    /**
+     * 获取当前用户参加的作业收集组。
+     */
+    public async getAttendedCollectionGroup(): Promise<CollectionGroup[]> {
+        if (! this.attendedCollectionGroup) {
+            const db = getManager();
+            this.attendedCollectionGroup = (await db.findOne(User, this.id, { relations: ["attendedCollectionGroup"] })).attendedCollectionGroup;
+        }
+        return this.attendedCollectionGroup;
+    }
 }

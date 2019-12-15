@@ -7,6 +7,10 @@ export { ListStudentRouter } from "./ListStudentRouter";
 export { ListTeacherRouter } from "./ListTeacherRouter";
 export { ListCollegeRouter } from "./ListCollegeRouter";
 export { ListClassAndGradeRouter } from "./ListClassAndGradeRouter";
+export { ListCollectionGroupRouter } from "./ListCollectionGroupRouter";
+export { ListCollectionItemRouter } from "./ListCollectionItemRouter";
+export { ListProductRouter } from "./ListProductRouter";
+export { ListProductCommentRouter } from "./ListProductCommentRouter";
 
 // 注册子系统
 export { CheckEmailRouter } from "./CheckEmailRouter";

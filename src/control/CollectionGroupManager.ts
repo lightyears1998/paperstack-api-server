@@ -29,11 +29,19 @@ export class CollectionGroupManager {
     }
 
     /**
+     * 列出全部作业收集组。
+     */
+    public static async listCollectionGroups(): Promise<CollectionGroup[]> {
+        const groups = await this.db.find(CollectionGroup, { relations: ["organizer", "attendants"] });
+        return groups;
+    }
+
+    /**
      * 获取对应id的作业收集组。
      * @param id 作业收集组的id
      */
     public static async getCollectionGroupById(id: string): Promise<CollectionGroup> {
-        const group = await this.db.findOne(CollectionGroup, id, { relations: ["organizer", "attendants"] });
+        const group = await this.db.findOne(CollectionGroup, id, { relations: ["organizer", "attendants", "items"] });
         return group;
     }
 
@@ -42,7 +50,7 @@ export class CollectionGroupManager {
      * @param id 作业收集项的id
      */
     public static async getCollectionItemById(id: string): Promise<CollectionItem> {
-        const item = await this.db.findOne(CollectionItem, id, { relations: ["group"] });
+        const item = await this.db.findOne(CollectionItem, id, { relations: ["group", "products"] });
         return item;
     }
 }

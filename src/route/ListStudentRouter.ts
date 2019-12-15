@@ -31,10 +31,10 @@ export class ListStudentRouter extends Router {
             students = await UserManager.listStudents();
         }
 
-
         const info = [];
         students.forEach((student) => {
             info.push({
+                id:     student.user.id,
                 email:  student.user.email,
                 number: student.number,
                 name:   student.name

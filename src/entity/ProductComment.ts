@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, getManager } from "typeorm";
 import { User, Product } from "./";
 
 /**
@@ -42,5 +42,14 @@ export class ProductComment {
         this.author = author;
         this.commentedAt = new Date();
         this.content = content;
+    }
+
+    /**
+     * 根据id获取评论。
+     */
+    public static async getProductCommentById(id: string): Promise<ProductComment> {
+        const db = getManager();
+        const comment = await db.findOne(ProductComment, id, { relations: ["author"] });
+        return comment;
     }
 }

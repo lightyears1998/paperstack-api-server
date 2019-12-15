@@ -13,7 +13,7 @@ export class RateProductRouter extends Router {
     verifyRequestArgument(): void {
         super.verifyRequestArgument();
         this.id = this.normalizeEmail(this.req.body.id);
-        this.rating = this.req.body.rating
+        this.rating = this.req.body.rating;
     }
 
     async process(): Promise<RouterResponse> {

@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, ManyToMany, JoinTable, Column, Unique, getManager } from "typeorm";
 import { generate as randomString } from "randomstring";
+import { UserType } from "./User";
 import { CollectionItem, User } from "./";
 
 /**
@@ -96,5 +97,43 @@ export class CollectionGroup {
         this.attendants.push(user);
 
         await db.save(this);
+    }
+
+    /**
+     * 判断当前作业收集组是否对特定用户可见。
+     * @param user 待检查的用户
+     */
+    public async isVisibleTo(user: User): Promise<boolean> {
+        const db = getManager();
+
+        switch (user.type) {
+            case UserType.Administrator: {
+                return true;
+            }
+
+            case UserType.Teacher: {
+                const organizedGroup = (await db.findOne(User, { id: user.id }, { relations: ["organizedCollectionGroup"] })).organizedCollectionGroup;
+
+                let visible = false;
+                organizedGroup.forEach(group => {
+                    if (group.id === this.id) {
+                        visible = true;
+                    }
+                });
+                return visible;
+            }
+
+            case UserType.Student: {
+                const attendedGroup = (await db.findOne(User, { id: user.id }, { relations: ["attendedCollectionGroup"] })).attendedCollectionGroup;
+
+                let visible = false;
+                attendedGroup.forEach(group => {
+                    if (group.id === this.id) {
+                        visible = true;
+                    }
+                });
+                return visible;
+            }
+        }
     }
 }

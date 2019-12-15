@@ -57,7 +57,7 @@ export class Product {
      */
     public static async getProductById(id: string): Promise<Product | null> {
         const db = getManager();
-        const product = await db.findOne(Product, id);
+        const product = await db.findOne(Product, id, { relations: ["item", "committer", "comments"] });
         return product;
     }
 
@@ -118,7 +118,7 @@ export class Product {
                 if (!this.committer) {
                     this.committer = (await db.findOne(Product, { id: this.id }, { relations: ["committer"] })).committer;
                 }
-                if (this.committer === user) {
+                if (this.committer.id === user.id) {
                     return true;
                 }
 
@@ -128,13 +128,14 @@ export class Product {
                 const thisGroup = (await db.findOne(CollectionItem, { id: this.item.id }, { relations: ["group"] })).group;
                 const attendedGroup = (await db.findOne(User, { id: user.id }, { relations: ["attendedCollectionGroup"] })).attendedCollectionGroup;
 
-                let visible = false;
+                let sameGroup = false;
                 attendedGroup.forEach(group => {
                     if (group.id === thisGroup.id) {
-                        visible = true;
+                        sameGroup = true;
                     }
                 });
-                return visible;
+
+                return sameGroup && this.isPublic;
             }
         }
     }

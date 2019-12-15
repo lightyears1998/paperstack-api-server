@@ -25,6 +25,12 @@ export class AdminService {
     public static async ensureAdminAccountExists(): Promise<void> {
         const adminCount = await this.db.count(Administrator);
         if (adminCount < 1) {
+            if (!(this.config && this.config.default && this.config.default.email && this.config.default.pass)) {
+                logger.info("当前系统中没有管理员账户。")
+                logger.info("未在配置文件中的admin.default字段指定默认管理员账户和密码，因此未创建默认管理员账户。");
+                return;
+            }
+
             try {
                 const admin = new Administrator(this.config.default.email);
                 await admin.user.modifyPassword(this.config.default.pass);

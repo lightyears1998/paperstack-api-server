@@ -74,6 +74,16 @@ export class Product {
     }
 
     /**
+     * 设置作业的评分。
+     * @param rating 评分
+     */
+    public async setRating(rating: number): Promise<void> {
+        const db = getManager();
+        this.rating = rating;
+        await db.save(this);
+    }
+
+    /**
      * 判断此作业对特定的用户是否可见。
      * 管理员可见所有作业，
      * 教师可见自己创建的作业收集项目下的所有作业，

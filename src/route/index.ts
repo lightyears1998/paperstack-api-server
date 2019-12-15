@@ -29,6 +29,7 @@ export { AddItemRouter } from "./AddItemRouter";
 export { AssignStudentToGroupRouter } from "./AssignUserToGroupRouter";
 export { AddProductRouter } from "./AddProductRouter";
 export { AddCommentRouter } from "./AddCommentRouter";
+export { RateProductRouter } from "./RateProductRouter";
 
 // 平台管理子系统
 export { AddAdminRouter } from "./AddAdminRouter";

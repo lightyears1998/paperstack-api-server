@@ -23,3 +23,5 @@ export { StudentProfileUpdateRouter } from "./StudentProfileUpdateRouter";
 // 平台管理子系统
 export { AddAdminRouter } from "./AddAdminRouter";
 export { AddTeacherRouter } from "./AddTeacherRouter";
+export { AddCollegeRouter } from "./AddCollegeRouter";
+export { AddClassAndGradeRouter } from "./AddClassAndGradeRouter";

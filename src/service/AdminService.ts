@@ -111,6 +111,7 @@ export class AdminService {
             const college = await this.db.findOneOrFail(College, { name: collegeName });
             const classAndGrade = new ClassAndGrade(college, classAndGradeName);
             await this.db.save(classAndGrade);
+            return true;
         } catch {
             return false;
         }

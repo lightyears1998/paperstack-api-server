@@ -75,6 +75,8 @@ export class CentralControl {
         // 挂载平台管理子系统的路由。
         this.rootRouter.mount("/admin/addAdmin", routers.AddAdminRouter);
         this.rootRouter.mount("/admin/addTeacher", routers.AddTeacherRouter);
+        this.rootRouter.mount("/admin/addCollege", routers.AddCollegeRouter);
+        this.rootRouter.mount("/admin/addClass", routers.AddClassAndGradeRouter);
     }
 
     /**

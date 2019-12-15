@@ -16,7 +16,7 @@ describe("entity/ProductComment", () => {
         await app.start();
 
         db = getManager();
-        user = new User("user@test.com", UserType.Student);
+        user = new User("user@unit.test.com", UserType.Student);
         await user.modifyPassword("somepassword");
         await db.save(user);
     });

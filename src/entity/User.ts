@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, getManager, Unique } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, getManager, Unique, ManyToMany } from "typeorm";
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
 import { Session } from "./";
@@ -61,10 +61,16 @@ export class User {
     sessions: Session[];
 
     /**
-     * 
+     * 组织的作业收集项目
      */
     @OneToMany(() => CollectionGroup, group => group.organizer)
     organizedCollectionGroup: CollectionGroup[];
+
+    /**
+     * 参与的作业收集项目
+     */
+    @ManyToMany(() => CollectionGroup, group => group.attendants)
+    attendedCollectionGroup: CollectionGroup[];
 
     /**
      * 创建用户数据结构

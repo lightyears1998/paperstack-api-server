@@ -13,7 +13,7 @@ describe("entity/Administrator", () => {
         await app.start();
     });
 
-    const testEmail = "test.admin@test.com";
+    const testEmail = "admin@unit.test.com";
     const testPassword = "testpassword";
 
     it("should craete new Administrator", async () => {

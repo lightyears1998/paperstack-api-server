@@ -20,9 +20,9 @@ describe("entity/CollectionGroup", () => {
 
         // 创建测试时使用的用户。
         users = [
-            new User("user1@test.com", UserType.Teacher),
-            new User("user2@test.com", UserType.Student),
-            new User("user3@test.com", UserType.Student)
+            new User("user1@unit.test.com", UserType.Teacher),
+            new User("user2@unit.test.com", UserType.Student),
+            new User("user3@unit.test.com", UserType.Student)
         ];
         for (let i = 0; i < users.length; ++i) {
             db = getManager();

@@ -16,7 +16,7 @@ describe("entity/Teacher", () => {
 
     const testEmail = "teacher@unit.test.com";
     const testPassword = "teacher.password";
-    const teacherNumber = "p000000";
+    const teacherNumber = "a000000";
 
     it("should create teacher", async () => {
         const teacher = new Teacher(testEmail, teacherNumber);

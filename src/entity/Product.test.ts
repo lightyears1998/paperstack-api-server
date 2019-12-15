@@ -19,8 +19,8 @@ describe("entity/Product", () => {
 
         // 构造测试中使用的用户。
         users = [
-            new User("user1@test.com", UserType.Teacher),
-            new User("user2@test.com", UserType.Student)
+            new User("user1@unit.test.com", UserType.Teacher),
+            new User("user2@unit.test.com", UserType.Student)
         ];
         for (let i = 0; i < users.length; ++i) {
             await users[i].modifyPassword("user.password");

@@ -19,9 +19,26 @@ export interface DatabaseConfiguration {
 }
 
 
+/**
+ * 平台管理子系统配置文件
+ */
+export interface AdminConfiguration {
+    /**
+     * 默认管理员账户配置。
+     */
+    default: {
+        /** 默认管理员邮箱 */
+        email: string;
+        /** 默认管理员密码 */
+        pass: string;
+    };
+}
+
+
 export default class Configuration {
     server: ServerConfiguration;
     database: DatabaseConfiguration;
+    admin: AdminConfiguration
 
     static load(configPath: string = path.resolve(`${__dirname}/../conf/config.yml`)): Configuration {
         let config: Configuration;

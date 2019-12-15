@@ -1,3 +1,4 @@
+export { AdminService } from "./AdminService";
 export { FileService } from "./FileService";
 export { MailService } from "./MailService";
 export { PreviewService } from "./PreviewService";

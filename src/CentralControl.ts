@@ -6,7 +6,7 @@ import RootRouter from "./route/RootRouter";
 import Configuration from "./Configuration";
 import Database from "./Database";
 import { UserManager } from "./control";
-import { UserMailAddressVerificationService, MailService } from "./service";
+import { UserMailAddressVerificationService, MailService, AdminService } from "./service";
 
 
 /**
@@ -86,6 +86,7 @@ export class CentralControl {
             await this.database.start();
 
             // 启动一般服务。
+            await AdminService.start(this.config.admin);
             MailService.start();
             UserMailAddressVerificationService.start();
 
@@ -113,6 +114,7 @@ export class CentralControl {
             UserManager.stop();
 
             // 停止一般服务。
+            AdminService.stop();
             UserMailAddressVerificationService.stop();
             MailService.stop();
 

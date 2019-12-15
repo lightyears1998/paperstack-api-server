@@ -21,6 +21,15 @@ export class College {
     }
 
     /**
+     * 列出当前学院下辖的所有班级。
+     */
+    public async listClasses(): Promise<ClassAndGrade[]> {
+        const db = getManager();
+        const classes = await db.find(ClassAndGrade, { college: this });
+        return classes;
+    }
+
+    /**
      * 创建指定名称的下辖班级数据结构。
      * @param name 带创建的班级的名称
      */

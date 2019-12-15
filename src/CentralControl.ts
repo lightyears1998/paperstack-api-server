@@ -54,6 +54,10 @@ export class CentralControl {
         // 为端点挂载通用路由。
         this.rootRouter.mount("/", routers.WelcomeRouter);
         this.rootRouter.mount("/welcome", routers.WelcomeRouter);
+        this.rootRouter.mount("/universal/listStudent", routers.ListStudentRouter);
+        this.rootRouter.mount("/universal/listTeacher", routers.ListTeacherRouter);
+        this.rootRouter.mount("/universal/listCollege", routers.ListCollegeRouter);
+        this.rootRouter.mount("/universal/listClassAndGrade", routers.ListClassAndGradeRouter);
 
         // 挂载注册子系统的路由。
         this.rootRouter.mount("/register/checkEmail", routers.CheckEmailRouter);

@@ -1,5 +1,5 @@
 import { getManager, EntityManager } from "typeorm";
-import { User, Student, ClassAndGrade } from "../entity";
+import { User, Student, ClassAndGrade, Teacher } from "../entity";
 
 
 /**
@@ -65,6 +65,22 @@ export class UserManager {
         } catch {
             return false;
         }
+    }
+
+    /**
+     * 列出学生。
+     */
+    public static async listStudents(): Promise<Student[]> {
+        const students = await this.db.find(Student, { relations: ["classAndGrade", "user"] });
+        return students;
+    }
+
+    /**
+     * 列出教师。
+     */
+    public static async listTeachers(): Promise<Teacher[]> {
+        const teachers = await this.db.find(Teacher, { relations: ["user"] });
+        return teachers;
     }
 
     /**

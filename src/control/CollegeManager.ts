@@ -16,6 +16,12 @@ export class CollegeManager {
         await db.save(college);
     }
 
+    static async listCollege(): Promise<College[]> {
+        const db = getManager();
+        const colleges = await db.find(College);
+        return colleges;
+    }
+
     /**
      * 获取指定名称的学院，学院不存在时返回null。
      * @param name 学院名称

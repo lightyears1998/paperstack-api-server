@@ -24,6 +24,18 @@ export class ClassAndGrade {
     }
 
     /**
+     * 获取班级下所有的学生。
+     */
+    public async listStudents(): Promise<Student[]> {
+        const db = getManager();
+        const students = await db.find(Student, { classAndGrade: this });
+        for (let i = 0; i < students.length; ++i) {
+            students[i] = await db.findOne(Student, students[i].id, { relations: ["user"] });
+        }
+        return students;
+    }
+
+    /**
      * 移除班级时，将所有引用此班级的外键设置为空。
      * 引用此班级的外键有：Student.class（学生的所属班级属性）。
      */

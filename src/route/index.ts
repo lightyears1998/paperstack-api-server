@@ -1,7 +1,12 @@
 export { Router } from "./Router";
 export { RouterResponseCode, RouterResponse } from "./RouterResponse";
 
+// 通用路由
 export { WelcomeRouter } from "./WelcomeRouter";
+export { ListStudentRouter } from "./ListStudentRouter";
+export { ListTeacherRouter } from "./ListTeacherRouter";
+export { ListCollegeRouter } from "./ListCollegeRouter";
+export { ListClassAndGradeRouter } from "./ListClassAndGradeRouter";
 
 // 注册子系统
 export { CheckEmailRouter } from "./CheckEmailRouter";

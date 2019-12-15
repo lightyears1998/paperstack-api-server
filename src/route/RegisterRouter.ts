@@ -51,7 +51,7 @@ export class RegisterRouter extends Router {
                 RouterResponseCode.EmailAlreadyRegisterd,
                 "当前邮箱已被注册。",
                 { ok: false }
-            ); 
+            );
         }
 
         // 创建新的学生用户。

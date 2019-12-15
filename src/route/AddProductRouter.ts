@@ -34,7 +34,9 @@ export class AddProductRouter extends Router {
         }
 
         // 默认不公开作业。
-        if (!this.isPublic) this.isPublic = false;
+        if (!this.isPublic) {
+            this.isPublic = false;
+        }
 
         const item = await CollectionGroupManager.getCollectionItemById(this.id);
         if (!item) {
@@ -53,8 +55,8 @@ export class AddProductRouter extends Router {
             if (group.id === thisGroup.id) {
                 allowedToAddProduct = true;
             }
-        })
-        
+        });
+
         if (!allowedToAddProduct) {
             return new RouterResponse(
                 RouterResponseCode.Failure,

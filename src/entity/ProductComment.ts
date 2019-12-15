@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { User, Product } from "./";
 
 /**
@@ -18,8 +18,7 @@ export class ProductComment {
     /**
      * 评论作者
      */
-    @OneToOne(() => User)
-    @JoinColumn()
+    @ManyToOne(() => User)
     author: User;
 
     /**

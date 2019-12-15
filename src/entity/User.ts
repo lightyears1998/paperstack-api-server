@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, getManager, Unique, ManyToMany } from "typeorm";
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
-import { Session } from "./";
 import { CollectionGroup } from "./CollectionGroup";
+import { Session } from "./";
 
 
 /**

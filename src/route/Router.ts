@@ -69,10 +69,10 @@ export abstract class Router {
 
     protected normalizeBoolean(any: unknown): boolean | null {
         if (any) {
-            return Boolean(any)
-        } else {
-            return null;
+            return Boolean(any);
         }
+        return null;
+
     }
 
     /**

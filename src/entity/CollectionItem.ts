@@ -1,7 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, Column, getManager } from "typeorm";
-import { CollectionGroup, Product } from "./";
 import { User } from "./User";
-import { is } from "bluebird";
+import { CollectionGroup, Product } from "./";
 
 /**
  * 作业收集项
@@ -51,12 +50,12 @@ export class CollectionItem {
      * @param fileHash 文件哈希
      */
     public async addProduct(commiter: User, isPublic: boolean, fileHash: string): Promise<Product> {
-        let product = new Product()
+        let product = new Product();
         product.item = this;
         product.committer = commiter;
         product.isPublic = isPublic;
         product.fileHash = fileHash;
-        
+
         const db = getManager();
         product = await db.save(product);
         return product;

@@ -33,7 +33,7 @@ export class CollectionGroupManager {
      * @param id 作业收集组的id
      */
     public static async getCollectionGroupById(id: string): Promise<CollectionGroup> {
-        const group = await this.db.findOne(CollectionGroup, id, {relations: ["organizer", "attendants"]});
+        const group = await this.db.findOne(CollectionGroup, id, { relations: ["organizer", "attendants"] });
         return group;
     }
 

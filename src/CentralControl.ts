@@ -79,6 +79,7 @@ export class CentralControl {
         this.rootRouter.mount("/collect/addItem", routers.AddItemRouter);
         this.rootRouter.mount("/collect/assignStudent", routers.AssignStudentToGroupRouter);
         this.rootRouter.mount("/collect/addProduct", routers.AddProductRouter);
+        this.rootRouter.mount("/collect/addComment", routers.AddCommentRouter);
 
         // 挂载平台管理子系统的路由。
         this.rootRouter.mount("/admin/addAdmin", routers.AddAdminRouter);

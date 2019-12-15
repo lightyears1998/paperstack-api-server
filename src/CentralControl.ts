@@ -5,7 +5,7 @@ import * as routers from "./route";
 import RootRouter from "./route/RootRouter";
 import Configuration from "./Configuration";
 import Database from "./Database";
-import { UserManager } from "./control";
+import { UserManager, CollectionGroupManager } from "./control";
 import { UserMailAddressVerificationService, MailService, AdminService } from "./service";
 
 
@@ -75,6 +75,10 @@ export class CentralControl {
         this.rootRouter.mount("/user/student/updateProfile", routers.StudentProfileUpdateRouter);
 
         // 挂载作业收集子系统的路由。
+        this.rootRouter.mount("/collect/addGroup", routers.AddGroupRouter);
+        this.rootRouter.mount("/collect/addItem", routers.AddItemRouter);
+        this.rootRouter.mount("/collect/assignStudent", routers.AssignStudentToGroupRouter);
+        this.rootRouter.mount("/collect/addProduct", routers.AddProductRouter);
 
         // 挂载平台管理子系统的路由。
         this.rootRouter.mount("/admin/addAdmin", routers.AddAdminRouter);
@@ -104,6 +108,7 @@ export class CentralControl {
 
             // 启动控制器。
             UserManager.start();
+            CollectionGroupManager.start();
 
             // 启动路由。
             this.mountRouters();
@@ -124,6 +129,7 @@ export class CentralControl {
 
             // 停止控制器。
             UserManager.stop();
+            CollectionGroupManager.stop();
 
             // 停止一般服务。
             AdminService.stop();

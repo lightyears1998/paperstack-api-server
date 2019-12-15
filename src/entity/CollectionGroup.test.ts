@@ -40,6 +40,14 @@ describe("entity/CollectionGroup", () => {
         group = await db.save(group);
     });
 
+    it("generateShareCode()能生成唯一的分享码", async () => {
+        group = await group.generateShareCode();
+
+        if (await db.count(CollectionGroup, { shareCode: group.shareCode }) !== 1) {
+            throw "generateShareCode()没有生成唯一的分享码。";
+        }
+    });
+
     it("should set organizer and attendants", async () => {
         group.organizer = organizer;
         group.attendants = attendants;

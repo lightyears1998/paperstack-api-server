@@ -24,6 +24,10 @@ export { StudentProfileRouter } from "./StudentProfileRouter";
 export { StudentProfileUpdateRouter } from "./StudentProfileUpdateRouter";
 
 // 作业收集子系统
+export { AddGroupRouter } from "./AddGroupRouter";
+export { AddItemRouter } from "./AddItemRouter";
+export { AssignStudentToGroupRouter } from "./AssignUserToGroupRouter";
+export { AddProductRouter } from "./AddProductRouter";
 
 // 平台管理子系统
 export { AddAdminRouter } from "./AddAdminRouter";

@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import * as bcrypt from "bcrypt";
 import logger from "../Logger";
 import { Session } from "./";
+import { CollectionGroup } from "./CollectionGroup";
 
 
 /**
@@ -58,6 +59,12 @@ export class User {
      */
     @OneToMany(() => Session, session => session.user)
     sessions: Session[];
+
+    /**
+     * 
+     */
+    @OneToMany(() => CollectionGroup, group => group.organizer)
+    organizedCollectionGroup: CollectionGroup[];
 
     /**
      * 创建用户数据结构

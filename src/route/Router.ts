@@ -67,6 +67,14 @@ export abstract class Router {
         return this.normalizeString(any).toLowerCase();
     }
 
+    protected normalizeBoolean(any: unknown): boolean | null {
+        if (any) {
+            return Boolean(any)
+        } else {
+            return null;
+        }
+    }
+
     /**
      * 验证请求参数
      *

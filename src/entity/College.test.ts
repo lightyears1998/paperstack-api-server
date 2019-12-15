@@ -78,7 +78,7 @@ describe("entity/College", () => {
 
     it("should remove college", async () => {
         const db = getManager();
-        const college = await db.find(College);
+        const college = await db.find(College, { name: testCollegeName });
         await db.remove(college);
     });
 

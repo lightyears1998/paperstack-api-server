@@ -5,12 +5,17 @@
  * 注册子系统代码以1开头。
  * 登录子系统代码以2开头。
  * 个人信息子系统代码以3开头。
+ * 作业收集子系统代码以4开头。
+ * 平台管理子系统代码以5开头。
  */
 export enum RouterResponseCode {
     // 通用
     Success = 0,
     Failure = 1,
     PartialSuccess = 3,
+    BadEmail = 4,
+    EmptyPassword = 5,
+    EmptyName = 6,
 
     // 注册子系统
     EmailNotRegistered = 11,
@@ -25,7 +30,13 @@ export enum RouterResponseCode {
     LoginPasswordMismatch = 23,
 
     // 个人信息子系统
-    NotStudent = 30
+    NotStudent = 30,
+
+    // 作业收集子系统
+
+    // 平台管理子系统
+    InsufficientPrivileges = 50,
+    BadNumber = 51,
 }
 
 

@@ -14,7 +14,7 @@ describe("entity/Teacher", () => {
         await app.start();
     });
 
-    const testEmail = "teacher@test.com";
+    const testEmail = "teacher@unit.test.com";
     const testPassword = "teacher.password";
     const teacherNumber = "p000000";
 
@@ -47,6 +47,16 @@ describe("entity/Teacher", () => {
         await user.terminateAllSessions();
         await db.remove(teacher);
         await db.remove(user);
+    });
+
+    it("numberMatchesPattern()能识别不符合规范的教师工号。", () => {
+        chai.expect(Teacher.numberMatchesPattern("a123456") === true);
+
+        chai.expect(Teacher.numberMatchesPattern("a12345") === false);
+        chai.expect(Teacher.numberMatchesPattern("a1234567") === false);
+        chai.expect(Teacher.numberMatchesPattern("") === false);
+        chai.expect(Teacher.numberMatchesPattern("a") === false);
+        chai.expect(Teacher.numberMatchesPattern("1706300000") === false);
     });
 
     after(async () => {

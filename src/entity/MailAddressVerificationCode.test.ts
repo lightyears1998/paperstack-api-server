@@ -9,11 +9,14 @@ chai.use(chaiHttp);
 
 
 describe("entity/MailAddressVerificationCode", () => {
+    const testEmail = "test@unit.test.com";
+
     before(async () => {
         await app.start();
-    });
 
-    const testEmail = "test@test.com";
+        const db = getManager();
+        await db.remove(await db.find(MailAddressVerificationCode, { email: testEmail }));
+    });
 
     it("should create new MailAddressVerificationCode", async () => {
         const code = new MailAddressVerificationCode(testEmail);

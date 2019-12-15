@@ -69,6 +69,12 @@ export class CentralControl {
         this.rootRouter.mount("/user/modifyPassword", routers.ModifyPasswordRouter);
         this.rootRouter.mount("/user/student/profile", routers.StudentProfileRouter);
         this.rootRouter.mount("/user/student/updateProfile", routers.StudentProfileUpdateRouter);
+
+        // 挂载作业收集子系统的路由。
+
+        // 挂载平台管理子系统的路由。
+        this.rootRouter.mount("/admin/addAdmin", routers.AddAdminRouter);
+        this.rootRouter.mount("/admin/addTeacher", routers.AddTeacherRouter);
     }
 
     /**

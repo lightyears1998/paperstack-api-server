@@ -21,3 +21,5 @@ export { StudentProfileUpdateRouter } from "./StudentProfileUpdateRouter";
 // 作业收集子系统
 
 // 平台管理子系统
+export { AddAdminRouter } from "./AddAdminRouter";
+export { AddTeacherRouter } from "./AddTeacherRouter";

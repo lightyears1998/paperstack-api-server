@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, OneToOne, JoinColumn, Column, Entity, ManyToOne } from "typeorm";
+import { PrimaryGeneratedColumn, OneToOne, JoinColumn, Column, Entity, ManyToOne, Unique } from "typeorm";
 import { ClassAndGrade } from "./ClassAndGrade";
 import { User, UserType } from "./";
 
@@ -6,6 +6,7 @@ import { User, UserType } from "./";
  * 学生
  */
 @Entity()
+@Unique(["number"])
 export class Student {
     @PrimaryGeneratedColumn("uuid")
     id: string;

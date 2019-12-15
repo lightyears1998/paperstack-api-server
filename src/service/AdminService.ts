@@ -1,6 +1,6 @@
 import { EntityManager, getManager } from "typeorm";
 import { AdminConfiguration } from "../Configuration";
-import { Administrator } from "../entity";
+import { Administrator, Teacher, College, ClassAndGrade } from "../entity";
 import logger from "../Logger";
 
 
@@ -26,7 +26,7 @@ export class AdminService {
         const adminCount = await this.db.count(Administrator);
         if (adminCount < 1) {
             if (!(this.config && this.config.default && this.config.default.email && this.config.default.pass)) {
-                logger.info("当前系统中没有管理员账户。")
+                logger.info("当前系统中没有管理员账户。");
                 logger.info("未在配置文件中的admin.default字段指定默认管理员账户和密码，因此未创建默认管理员账户。");
                 return;
             }
@@ -45,5 +45,74 @@ export class AdminService {
 
     public static stop(): void {
         this.db = null;
+    }
+
+    /**
+     * 创建新的管理员账户。
+     * @param email 管理员邮箱
+     * @param password 管理员密码
+     */
+    public static async newAdmin(email: string, password: string): Promise<boolean> {
+        try {
+            const admin = new Administrator(email);
+            await admin.user.modifyPassword(password);
+            await this.db.save(admin.user);
+            await this.db.save(admin);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * 创建新的教师用户。
+     * @param email 教师邮箱
+     * @param password 教师密码
+     * @param number 教师工号
+     * @param name 教师姓名
+     */
+    public static async newTeacher(email: string, password: string, number: string, name?: string): Promise<boolean> {
+        if (!name) {
+            name = null;
+        }
+        try {
+            const teacher = new Teacher(email, number);
+            await teacher.user.modifyPassword(password);
+            teacher.name = name;
+            await this.db.save(teacher.user);
+            await this.db.save(teacher);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * 创建新的学院。
+     * @param collegeName 学院名称
+     */
+    public static async newCollege(collegeName: string): Promise<boolean> {
+        try {
+            const college = new College(collegeName);
+            await this.db.save(college);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * 创建学院的下辖班级。
+     * @param collegeName 学院名称
+     * @param classAndGradeName 班级名称
+     */
+    public static async newClassAndGrade(collegeName: string, classAndGradeName: string): Promise<boolean> {
+        try {
+            const college = await this.db.findOneOrFail(College, { name: collegeName });
+            const classAndGrade = new ClassAndGrade(college, classAndGradeName);
+            await this.db.save(classAndGrade);
+        } catch {
+            return false;
+        }
     }
 }

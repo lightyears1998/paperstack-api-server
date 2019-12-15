@@ -5,12 +5,14 @@ import * as yaml from "js-yaml";
 import logger from "./Logger";
 
 
+// 对应config.yml中的server字段。
 export interface ServerConfiguration {
     port: number;
     enableRegister: boolean;
 }
 
 
+// 对应config.yml中的database字段。
 export interface DatabaseConfiguration {
     host: string;
     user: string;
@@ -20,7 +22,7 @@ export interface DatabaseConfiguration {
 
 
 /**
- * 平台管理子系统配置文件
+ * 平台管理子系统配置文件，对应config.yml中的admin字段。
  */
 export interface AdminConfiguration {
     /**

@@ -2,6 +2,8 @@ import * as path from "path";
 import * as fs from "fs-extra";
 import * as winston from "winston";
 
+
+// 在不同的运行环境下选择不同的日志路径。
 let logPath: string;
 switch (process.env.NODE_ENV) {
     default:
@@ -13,7 +15,6 @@ switch (process.env.NODE_ENV) {
         logPath = path.resolve(__dirname, "../var/log");
     }
 }
-
 fs.ensureDir(logPath);
 
 

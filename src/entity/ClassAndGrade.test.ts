@@ -25,7 +25,7 @@ describe("entity/ClassAndGrade", () => {
     const testPassword = testEmail;
     const testNumber = "0706300000";
 
-    it("setReferencedKeyToNull()能将引用此班级的外键设置为空。", async () => {
+    it("能用setReferencedKeyToNull()将引用此班级的外键设置为空。", async () => {
         let college = new College(testCollegeName);
         let classAndGrade = new ClassAndGrade(college, testClassName);
         let student = new Student(testEmail);

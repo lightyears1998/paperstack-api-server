@@ -35,12 +35,12 @@ describe("entity/CollectionGroup", () => {
 
     let group: CollectionGroup;
 
-    it("should create CollectionGroup", async () => {
+    it("能创建CollectionGroup", async () => {
         group = new CollectionGroup();
         group = await db.save(group);
     });
 
-    it("generateShareCode()能生成唯一的分享码", async () => {
+    it("能用generateShareCode()生成唯一的分享码", async () => {
         group = await group.generateShareCode();
 
         if (await db.count(CollectionGroup, { shareCode: group.shareCode }) !== 1) {
@@ -48,7 +48,7 @@ describe("entity/CollectionGroup", () => {
         }
     });
 
-    it("should set organizer and attendants", async () => {
+    it("能设置organizer和attendants", async () => {
         group.organizer = organizer;
         group.attendants = attendants;
         await db.save(group);
@@ -62,7 +62,7 @@ describe("entity/CollectionGroup", () => {
         }
     });
 
-    it("should add CollectionItem", async () => {
+    it("能添加CollectionItem", async () => {
         const items = [
             new CollectionItem(),
             new CollectionItem()
@@ -77,7 +77,7 @@ describe("entity/CollectionGroup", () => {
         }
     });
 
-    it("should remove CollectionGroup", async () => {
+    it("能删除CollectionGroup", async () => {
         await db.remove(await db.find(CollectionItem, { group: group }));
         await db.remove(group);
     });

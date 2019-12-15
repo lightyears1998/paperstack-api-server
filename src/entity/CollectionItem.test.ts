@@ -18,12 +18,12 @@ describe("entity/CollectionItem", () => {
 
     let item: CollectionItem;
 
-    it("should create CollectionItem", async () => {
+    it("能创建CollectionItem", async () => {
         item = new CollectionItem();
         item = await db.save(item);
     });
 
-    it("should attach requirement and deadline", async () => {
+    it("能添加requirement和deadline", async () => {
         const requirement = "本次作业使用C++完成，最迟明天提交。";
         const deadline = new Date(new Date().getTime() + 1000*60*60*24);
 
@@ -37,7 +37,7 @@ describe("entity/CollectionItem", () => {
         }
     });
 
-    it("should add products", async () => {
+    it("能添加products", async () => {
         const products = [new Product(), new Product()];
         products.forEach(product => {
             product.item = item;
@@ -51,7 +51,7 @@ describe("entity/CollectionItem", () => {
         }
     });
 
-    it("should remove CollectionItem", async () => {
+    it("能删除CollectionItem", async () => {
         await db.remove(await db.find(Product, { item: item }));
         await db.remove(item);
     });

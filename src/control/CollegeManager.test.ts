@@ -17,20 +17,20 @@ describe("control/CollegeManager", () => {
     const testCollegeName = "测试学院";
     const testClassName = ["测试171", "测试172"];
 
-    it("createCollege() should work", async () => {
+    it("能用createCollege()创建学院", async () => {
         await CollegeManager.createCollege(testCollegeName);
 
         const db = getManager();
         db.findOneOrFail(College, { name: testCollegeName });
     });
 
-    it("getCollege() should work", async () => {
+    it("能用getCollege()取得学院", async () => {
         const college = await CollegeManager.getCollege(testCollegeName);
         await college.createClass(testClassName[0]);
         await college.createClass(testClassName[1]);
     });
 
-    it("removeCollege() should work", async () => {
+    it("能用removeCollege()删除学院", async () => {
         await CollegeManager.removeCollege(testCollegeName);
     });
 

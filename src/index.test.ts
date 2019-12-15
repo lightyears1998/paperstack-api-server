@@ -7,7 +7,7 @@ import { RouterResponseCode } from "./route";
 chai.use(chaiHttp);
 
 describe("App, CentralControl and WelcomRouter", () => {
-    it("should start", async () => {
+    it("应用程序可以正常启动。", async () => {
         await app.start();
     });
 

@@ -1,2 +1,2 @@
-# Ignore build result.
+# TypeScript编译生成的JS文件
 /lib/**

@@ -18,7 +18,7 @@ describe("entity/Session", () => {
      * 在调试期间创建一个不绑定任何用户的会话用于基本的单元测试。
      */
 
-    let token; // 在接下来的测试中被赋值。
+    let token: string; // 在接下来的测试中被赋值。
 
     it("could create, read token value and be saved to database", async () => {
         const session = new Session();

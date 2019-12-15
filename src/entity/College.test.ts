@@ -17,7 +17,7 @@ describe("entity/College", () => {
     const testCollegeName = "测试学院";
     const testClassName = ["测试171", "测试172"];
 
-    it("should create college", async () => {
+    it("能创建college", async () => {
         const db = getManager();
         const college = new College(testCollegeName);
 
@@ -25,7 +25,7 @@ describe("entity/College", () => {
         await db.findOneOrFail(College, { name: testCollegeName });
     });
 
-    it("should create classes", async () => {
+    it("能创建classes", async () => {
         const db = getManager();
         const college = await db.findOneOrFail(College, { name: testCollegeName });
 
@@ -38,7 +38,7 @@ describe("entity/College", () => {
         await db.save(college);
     });
 
-    it("should load college and class properly", async ()=> {
+    it("能正确加载college和class", async ()=> {
         const db = getManager();
         const college = await db.findOneOrFail(College, { name: testCollegeName }, { relations: ["classes"] });
         const classes = college.classes;
@@ -48,13 +48,13 @@ describe("entity/College", () => {
         }
     });
 
-    it("should remove classes", async () => {
+    it("能删除classes", async () => {
         const db = getManager();
         const college = await db.findOneOrFail(College, { name: testCollegeName }, { relations: ["classes"] });
         await db.remove(college.classes);
     });
 
-    it("should work with createClass() and removeClass()", async () => {
+    it("createClass()和removeClass()没有bug", async () => {
         const db = getManager();
 
         const college = new College(testCollegeName);
@@ -76,7 +76,7 @@ describe("entity/College", () => {
         }
     });
 
-    it("should remove college", async () => {
+    it("能删除college", async () => {
         const db = getManager();
         const college = await db.find(College, { name: testCollegeName });
         await db.remove(college);

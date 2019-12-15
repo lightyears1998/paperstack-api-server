@@ -18,14 +18,14 @@ describe("entity/MailAddressVerificationCode", () => {
         await db.remove(await db.find(MailAddressVerificationCode, { email: testEmail }));
     });
 
-    it("should create new MailAddressVerificationCode", async () => {
+    it("能生成新的MailAddressVerificationCode", async () => {
         const code = new MailAddressVerificationCode(testEmail);
 
         const db = getManager();
         await db.save(code);
     });
 
-    it("should not be expired", async () => {
+    it("刚刚生成的验证码不会过期", async () => {
         const db = getManager();
         const code = await db.findOneOrFail(MailAddressVerificationCode, { email: testEmail });
 
@@ -34,7 +34,7 @@ describe("entity/MailAddressVerificationCode", () => {
         }
     });
 
-    it("should be expired after expiration", async () => {
+    it("一段时间后验证码可以失效", async () => {
         const db = getManager();
         const code = await db.findOneOrFail(MailAddressVerificationCode, { email: testEmail });
 

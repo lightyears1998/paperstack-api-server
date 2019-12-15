@@ -7,7 +7,7 @@ import { DatabaseConfiguration } from "./Configuration";
 /**
  * 数据库
  *
- * 负责抽象底层数据库接口并提供面向应用程序的编程借口。
+ * 负责抽象底层数据库接口并提供面向应用程序的编程接口。
  */
 export default class Database {
     private config: DatabaseConfiguration
@@ -31,6 +31,7 @@ export default class Database {
         entities.ClassAndGrade
     ]
 
+    // 离线开发时使用的数据库配置（文件型数据库SQLite）
     private offlineDevConfig: typeorm.ConnectionOptions = {
         name:        "default",
         type:        "sqlite",

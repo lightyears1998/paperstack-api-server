@@ -36,7 +36,7 @@ describe("entity/User", () => {
         }
     });
 
-    it("should modify password", async ()=> {
+    it("should modify and verify password", async ()=> {
         const db = getManager();
         const user = await db.findOneOrFail(User, { email: testEmail });
 

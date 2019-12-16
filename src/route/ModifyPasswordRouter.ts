@@ -4,7 +4,7 @@ import { Router } from "./";
 
 
 /**
- * 登录子系统：用户登录路由
+ * 个人主页子系统：修改密码路由
  */
 export class ModifyPasswordRouter extends Router {
     private password: string;

@@ -6,7 +6,7 @@ import { Router } from "./";
 
 
 /**
- * 登录子系统：用户登录路由
+ * 个人主页子系统：更新学生信息路由
  */
 export class StudentProfileUpdateRouter extends Router {
     private number: string;

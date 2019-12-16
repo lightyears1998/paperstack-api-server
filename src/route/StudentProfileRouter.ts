@@ -5,7 +5,7 @@ import { Router } from "./";
 
 
 /**
- * 登录子系统：用户登录路由
+ * 个人主页子系统：读取学生信息路由
  */
 export class StudentProfileRouter extends Router {
     async process(): Promise<RouterResponse> {

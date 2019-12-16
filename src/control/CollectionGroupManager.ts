@@ -2,7 +2,7 @@ import { EntityManager, getManager } from "typeorm";
 import { User, CollectionGroup, CollectionItem } from "../entity";
 
 /**
- * 作业手机子系统：作业收集组管理器
+ * 作业收集子系统：作业收集组管理器
  */
 export class CollectionGroupManager {
     private static db: EntityManager;
